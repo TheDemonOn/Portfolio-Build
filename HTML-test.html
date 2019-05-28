@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="MyStyle.css" />
-    <script src="Testing.js"></script>
+    <script src="LetterPositioning.js"></script>
+    <script src="RandomLetters.js"></script>
     <title>Antonio's Website</title>
   </head>
   <body>
@@ -13,16 +14,13 @@
       <h1>Hello Stranger</h1>
     </header>
     <div>
-      <form name="woo" onsubmit="testings() ">
-        <input
-          type="text"
-          placeholder="What is your name?"
-          id="name"
-          required
-        />
+      <form name="woo" onsubmit="OVERLORD()">
+        <input type="text" placeholder="How many words?" id="name" />
+        <br /><br />
+        <button type="submit">Generate random words</button>
       </form>
     </div>
-
+    <br />
     <footer><small>Copyright &copy; 2019, Antonio's Website</small></footer>
   </body>
 </html>
