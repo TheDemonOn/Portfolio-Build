@@ -4,6 +4,7 @@ function OVERLORD() {
   let assembledWordsArray = []
   let assembledWord = []
   let assembledSentence = []
+  let keyHolder = []
   var wordInformation = {
     count: 0
   }
@@ -26,8 +27,7 @@ function OVERLORD() {
     assembledWord = ""
   }
 
-  //
-  function wordAssembleVCVC() {
+  function wordAssembleVCVCRhyme() {
     // The VCVC represents: Vowel, Consonant, Vowel, Consonant.
     // Perhaps eventually modify this function to use foreach to learn
     // This function now creates a rhymeKey which I can use to track
@@ -45,19 +45,44 @@ function OVERLORD() {
       Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
     )
     let rhymeKey = Math.floor(Math.random() * Vowels.end.length)
+    keyHolder.push(rhymeKey)
 
     assembledWordsArray.push(Vowels.end[rhymeKey])
   }
 
-  function VCVCrhyme(key) {}
+  function wordAssembleVCVC() {
+    assembledWordsArray.push(
+      Consonants.beginning[
+        Math.floor(Math.random() * Consonants.beginning.length)
+      ]
+    )
 
-  for (let z = 0; z < wordInformation.count; z++) {
-    // The number here being how many words of VCVC you want to generate.
-    wordAssembleVCVC()
-    wordBuild()
+    assembledWordsArray.push(
+      Vowels.middle[Math.floor(Math.random() * Vowels.middle.length)]
+    )
+    assembledWordsArray.push(
+      Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
+    )
+    assembledWordsArray.push(
+      Vowels.end[Math.floor(Math.random() * Vowels.end.length)]
+    )
   }
 
-  console.log(addedWords)
+  function rhymeStructure() {
+    for (let z = 0; z < wordInformation.count - 1; z++) {
+      // The number here being how many words of VCVC you want to generate.
+      // Any inputs less than one or nothing at all gives one word because
+      // right now having an input or not is not a condition for the part outside
+      // of the loop. This will be fixed when the inputs are sanitized.
+      wordAssembleVCVC()
+      wordBuild()
+    }
+    wordAssembleVCVCRhyme()
+    wordBuild()
+  }
+  rhymeStructure()
+
+  console.log(keyHolder)
 
   console.log(wordInformation.count)
 
