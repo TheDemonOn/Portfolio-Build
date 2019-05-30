@@ -4,7 +4,7 @@
 // adjustments and give that as additional information on the side of the
 // project or a timeline of large steps or a part of a Youtube video.
 
-// I think in order ti make better words I should probably add more predefined
+// I think in order to make better words I should probably add more predefined
 // bunches of letters that are common, check soybomb
 const Consonants = {
   beginning: [
