@@ -14,10 +14,28 @@
       <h1>Hello Stranger</h1>
     </header>
     <div>
-      Add a new form for how many lines of words. When sanitizing inputs put a
-      cap on how high.
+      <h2>
+        When revamping the rhyming logic make it so that when it stores the
+        rhymeKey it includes all the vowels that are immediately preceding it.
+        When sanitizing inputs put cap on how high. Fill in the specifications
+        then hit generate or press
+        <i><strong>enter</strong></i
+        >.
+      </h2>
       <form name="woo" onsubmit="OVERLORD()">
-        <input type="text" placeholder="How many words?" id="name" />
+        <input
+          type="text"
+          placeholder="How many words per line?"
+          id="WPL"
+          required
+        />
+        <br /><br />
+        <input
+          type="text"
+          placeholder="How many lines?"
+          id="lineNumber"
+          required
+        />
         <br /><br />
         <button type="submit">Generate random words</button>
       </form>

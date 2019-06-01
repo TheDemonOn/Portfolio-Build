@@ -1,19 +1,25 @@
 function OVERLORD() {
-  let words = []
-  let addedWords = []
   let assembledWordsArray = []
   let assembledWord = []
   let assembledSentence = []
   let keyHolder = []
-  var wordInformation = {
-    count: 0
+  let wordInformation = {
+    count: 0,
+    line: 0
   }
+
+  // This is the line between information storage and function logic.
 
   // This pulls information typed in and stores it.
   function letterCount() {
-    wordInformation.count = document.getElementById("name").value
+    wordInformation.count = document.getElementById("WPL").value
   }
   letterCount()
+
+  function lineCount() {
+    wordInformation.line = document.getElementById("lineNumber").value
+  }
+  lineCount()
 
   function wordBuild() {
     // This function combines each generated array into a string then takes
@@ -50,6 +56,22 @@ function OVERLORD() {
     assembledWordsArray.push(Vowels.end[rhymeKey])
   }
 
+  function wordAssembleVCVCRhymes() {
+    assembledWordsArray.push(
+      Consonants.beginning[
+        Math.floor(Math.random() * Consonants.beginning.length)
+      ]
+    )
+
+    assembledWordsArray.push(
+      Vowels.middle[Math.floor(Math.random() * Vowels.middle.length)]
+    )
+    assembledWordsArray.push(
+      Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
+    )
+    assembledWordsArray.push(Vowels.end[keyHolder[0]])
+  }
+
   function wordAssembleVCVC() {
     assembledWordsArray.push(
       Consonants.beginning[
@@ -68,6 +90,8 @@ function OVERLORD() {
     )
   }
 
+  // This is the line between function logic and functions functioning.
+
   function rhymeStructure() {
     for (let z = 0; z < wordInformation.count - 1; z++) {
       // The number here being how many words of VCVC you want to generate.
@@ -80,7 +104,38 @@ function OVERLORD() {
     wordAssembleVCVCRhyme()
     wordBuild()
   }
-  rhymeStructure()
+
+  function rhymeStructure11() {
+    if (wordInformation.count > 1) {
+      // If there is only one word per line then
+      // this will skip right to the rhyming part so it doesn't give 2 words.
+      for (let p = 0; p < wordInformation.count - 1; p++) {
+        wordAssembleVCVC()
+        wordBuild()
+      }
+    }
+    wordAssembleVCVCRhyme()
+    wordBuild()
+    // In theory this will be the second line. This is hard-coded to be 2 for
+    // testing purposes.
+    if (wordInformation.count > 1) {
+      for (let p = 0; p < wordInformation.count - 1; p++) {
+        wordAssembleVCVC()
+        wordBuild()
+      }
+    }
+    wordAssembleVCVCRhymes()
+    wordBuild()
+  }
+  rhymeStructure11()
+
+  function lineGenerator() {
+    for (let b = 0; b < wordInformation.line; b++) {
+      rhymeStructure() // This will change to reflect the function of the
+      // type of rhyming pattern you want.
+    }
+  }
+  // lineGenerator()
 
   console.log(keyHolder)
 
