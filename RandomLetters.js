@@ -105,29 +105,39 @@ function OVERLORD() {
     wordBuild()
   }
 
-  function rhymeStructure11() {
-    if (wordInformation.count > 1) {
-      // If there is only one word per line then
-      // this will skip right to the rhyming part so it doesn't give 2 words.
-      for (let p = 0; p < wordInformation.count - 1; p++) {
-        wordAssembleVCVC()
+  function rhymeStructure1122() {
+    if (wordInformation.line % 2 === 0) {
+      for (let f = 0; f < wordInformation.line; f += 2) {
+        if (wordInformation.line > 1) {
+          // This will end the function with one word.
+          if (wordInformation.count > 1) {
+            // If there is only one word per line then
+            // this will skip right to the rhyming part so it doesn't give 2 words.
+            for (let p = 0; p < wordInformation.count - 1; p++) {
+              wordAssembleVCVC()
+              wordBuild()
+            }
+          }
+          wordAssembleVCVCRhyme()
+          wordBuild()
+        } else {
+          wordAssembleVCVCRhyme()
+          return wordBuild()
+        }
+        // In theory this will be the second line. This is hard-coded to be 2 for
+        // testing purposes.
+        for (let r = 0; r < wordInformation.count - 1; r++) {
+          wordAssembleVCVC()
+          wordBuild()
+        }
+        wordAssembleVCVCRhymes()
         wordBuild()
       }
+    } else {
     }
-    wordAssembleVCVCRhyme()
-    wordBuild()
-    // In theory this will be the second line. This is hard-coded to be 2 for
-    // testing purposes.
-    if (wordInformation.count > 1) {
-      for (let p = 0; p < wordInformation.count - 1; p++) {
-        wordAssembleVCVC()
-        wordBuild()
-      }
-    }
-    wordAssembleVCVCRhymes()
-    wordBuild()
   }
-  rhymeStructure11()
+
+  rhymeStructure1122()
 
   function lineGenerator() {
     for (let b = 0; b < wordInformation.line; b++) {
@@ -136,7 +146,7 @@ function OVERLORD() {
     }
   }
   // lineGenerator()
-
+  console.log(1 % 2)
   console.log(keyHolder)
 
   console.log(wordInformation.count)
