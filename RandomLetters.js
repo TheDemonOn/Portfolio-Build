@@ -7,6 +7,7 @@ function OVERLORD() {
     count: 0,
     line: 0
   }
+  let keyHolderPosition = [0]
 
   // This is the line between information storage and function logic.
 
@@ -51,6 +52,7 @@ function OVERLORD() {
       Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
     )
     let rhymeKey = Math.floor(Math.random() * Vowels.end.length)
+    // When revamping make this also combine with the previous characters if they are vowel
     keyHolder.push(rhymeKey)
 
     assembledWordsArray.push(Vowels.end[rhymeKey])
@@ -69,7 +71,7 @@ function OVERLORD() {
     assembledWordsArray.push(
       Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
     )
-    assembledWordsArray.push(Vowels.end[keyHolder[0]])
+    assembledWordsArray.push(Vowels.end[keyHolder[keyHolderPosition[0]]])
   }
 
   function wordAssembleVCVC() {
@@ -106,26 +108,23 @@ function OVERLORD() {
   }
 
   function rhymeStructure1122() {
-    if (wordInformation.line % 2 === 0) {
+    if (wordInformation.line == 1) {
+      wordAssembleVCVCRhyme()
+      return wordBuild()
+    } else if (wordInformation.line % 2 === 0) {
+      // If the word line is a multiple of 2
       for (let f = 0; f < wordInformation.line; f += 2) {
-        if (wordInformation.line > 1) {
-          // This will end the function with one word.
-          if (wordInformation.count > 1) {
-            // If there is only one word per line then
-            // this will skip right to the rhyming part so it doesn't give 2 words.
-            for (let p = 0; p < wordInformation.count - 1; p++) {
-              wordAssembleVCVC()
-              wordBuild()
-            }
-          }
-          wordAssembleVCVCRhyme()
+        // This will generate 2 lines at a time
+        keyHolderPosition.pop()
+        keyHolderPosition.push(f / 2)
+        for (let p = 0; p < wordInformation.count - 1; p++) {
+          // Perhaps simplify this to a function?
+          wordAssembleVCVC()
           wordBuild()
-        } else {
-          wordAssembleVCVCRhyme()
-          return wordBuild()
         }
-        // In theory this will be the second line. This is hard-coded to be 2 for
-        // testing purposes.
+        wordAssembleVCVCRhyme()
+        wordBuild()
+        // This is the second line.
         for (let r = 0; r < wordInformation.count - 1; r++) {
           wordAssembleVCVC()
           wordBuild()
@@ -134,6 +133,28 @@ function OVERLORD() {
         wordBuild()
       }
     } else {
+      // More than one line but not a multiple of two.
+      for (let f = 0; f < wordInformation.line - 2; f += 2) {
+        // This will generate 2 lines at a time
+        keyHolderPosition.pop()
+        keyHolderPosition.push(f / 2)
+        for (let p = 0; p < wordInformation.count - 1; p++) {
+          // Perhaps simplify this to a function?
+          wordAssembleVCVC()
+          wordBuild()
+        }
+        wordAssembleVCVCRhyme()
+        wordBuild()
+        // This is the second line.
+        for (let r = 0; r < wordInformation.count - 1; r++) {
+          wordAssembleVCVC()
+          wordBuild()
+        }
+        wordAssembleVCVCRhymes()
+        wordBuild()
+      }
+      wordAssembleVCVCRhyme()
+      wordBuild()
     }
   }
 
@@ -146,7 +167,6 @@ function OVERLORD() {
     }
   }
   // lineGenerator()
-  console.log(1 % 2)
   console.log(keyHolder)
 
   console.log(wordInformation.count)
