@@ -9,6 +9,12 @@ h2 {
     font-size: 1em
 }
 
+#grapheme {
+    color: blanchedalmond;
+    font-family: arial;
+    font-size: 1em
+}
+
 body {
     background-color: rgba(26, 56, 73, 0.747);
 }

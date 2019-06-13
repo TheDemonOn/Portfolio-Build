@@ -4,6 +4,12 @@ function OVERLORD() {
   let assembledSentence = []
   let keyHolder = []
   let keyHolder2 = []
+  let gorientation = []
+  let baseRhyme = []
+  let rhyme1 = []
+  let rhyme2 = []
+  let rhymes1 = []
+  let rhymes2 = []
   let wordInformation = {
     count: 0,
     line: 0
@@ -21,6 +27,18 @@ function OVERLORD() {
     wordInformation.line = document.getElementById("lineNumber").value
   }
   lineCount()
+  function orientation() {
+    gorientation.push(document.getElementById("graphemeStructure").value)
+  }
+  orientation()
+
+  if (gorientation === "VCVC" || "vcvc") {
+    baseRhyme.push(wordAssembleVCVC())
+    rhyme1.push(wordAssembleVCVCRhyme())
+    rhyme2.push(wordAssembleVCVCRhyme2())
+    rhymes1.push(wordAssembleVCVCRhymes())
+    rhymes2.push(wordAssembleVCVCRhymes2())
+  }
 
   function wordBuild() {
     // This function combines each generated array into a string then takes
@@ -135,6 +153,7 @@ function OVERLORD() {
   // This is the line between function logic and functions functioning.
 
   function rhymeStructure() {
+    // Just for testing originally I think.
     for (let z = 0; z < wordInformation.count - 1; z++) {
       // The number here being how many words of VCVC you want to generate.
       // Any inputs less than one or nothing at all gives one word because
