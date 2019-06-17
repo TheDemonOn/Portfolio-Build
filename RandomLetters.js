@@ -14,7 +14,7 @@ function OVERLORD() {
     count: 0,
     line: 0,
   }
-  let vowelPrecedingCheckerRegex = /[aeiou]/gi
+  let vowelPrecedingCheckerRegex = /[aeiou]/gi // Experiment using y as well.
 
   // This is the line between information storage and function logic.
 
@@ -57,7 +57,9 @@ function OVERLORD() {
     rhymes2 = wordAssembleVCVRhymes2
   }
 
-  if (gorientation == 'CVC' || gorientation == 'cvc') {
+  if (gorientation == 'CVC' || gorientation == 'cvc') { // A problem with words under this generation 
+    // is that it doesn't really rhyme if I just take the last consonant and attach it to the next, 
+    // unless it includes the previous connecting vowels
     baseRhyme = wordAssembleCVC
     rhyme1 = wordAssembleCVCRhyme
     rhyme2 = wordAssembleCVCRhyme2
