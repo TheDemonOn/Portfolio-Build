@@ -15,8 +15,9 @@
     </header>
     <div>
       <h2>
-        FIGURE OUT HOW TO INSERT FUNCTIONS INTO VARIABLES WITHOUT THEM BEING
-        IMMIDIATELY INVOKED. When revamping the rhyming logic make it so that
+        Smooth out word generation by removing 3 sets or more of repeating
+        characters, and removing excess of more than 2 consecutive letters. Add
+        CCVV, CVVC, VVCC, CCVV. When revamping the rhyming logic make it so that
         when it stores the rhymeKey it includes all the vowels that are
         immediately preceding it. When sanitizing inputs put cap on how high.
         Fill in the specifications then hit generate or press
@@ -28,6 +29,7 @@
           type="text"
           placeholder="How many words per line?"
           id="WPL"
+          value="1"
           required
         />
         <br /><br />
@@ -35,6 +37,7 @@
           type="text"
           placeholder="How many lines?"
           id="lineNumber"
+          value="10"
           required
         />
         <br /><br />
@@ -42,8 +45,16 @@
           type="text"
           id="graphemeStructure"
           placeholder="VC orientation"
+          value="vcvc"
         />
         <br /><br />
+        <input
+          type="text"
+          id="vcvcStructure"
+          placeholder="VC structure"
+          value="1122"
+        /><br />
+        <br />
         <button type="submit">Generate random words</button>
       </form>
     </div>
