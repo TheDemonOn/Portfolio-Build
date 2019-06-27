@@ -13,18 +13,24 @@
     <header>
       <h1>Hello Stranger</h1>
     </header>
-    <div>
-      <h2>
-        Smooth out word generation by removing 3 sets or more of repeating
-        characters, and removing excess of more than 2 consecutive letters. Add
-        CCVV, CVVC, VVCC, CCVV. When revamping the rhyming logic make it so that
-        when it stores the rhymeKey it includes all the vowels that are
-        immediately preceding it. When sanitizing inputs put cap on how high.
+      <h2 class="margin">
+        GOOD NEW IDEAS: Integrate youtube or some mp3 uploader so you can create lyrics and adjust without having to leave the page. Create more features for aiding this
+        creation by being able to easily delete lines and add newly generated ones. Have the controls for parameters follow you as you scroll down and build it out. 
+        Also make the words easier to read and remove the commas.
+        Although after additional thought I would have to 3 versions, one for prefixes,
+        // 2nd for vowel.beginning, and 3rd for vowels.middle, this is for cases like vcvc, or cvc.
+        // Do the cv endings after constructing the additional rhymeGroups.
+        Try to make another thing that also submits onsubmit to make the display work. 
+        Smooth out word generation by removing 3 sets or more of repeating.
+        characters, and removing excess of more than 2 consecutive letters.
+        When sanitizing inputs put cap on how high.
         Fill in the specifications then hit generate or press
         <i><strong>enter</strong></i
         >.
       </h2>
-      <form name="woo" onsubmit="OVERLORD()">
+      <div class="margin" id="positioning">
+      <form name="woo"  >
+        <div id="generationParameters">
         <input
           type="text"
           placeholder="How many words per line?"
@@ -54,11 +60,20 @@
           placeholder="VC structure"
           value="1122"
         /><br />
-        <br />
-        <button type="submit">Generate random words</button>
+        <br /> 
+        <button type="button" onclick="OverlordAndInsert()">Generate random words</button>
+        <br> <br>
+        <button type="submit">Reset</button>
       </form>
     </div>
-    <br />
+    <div id="generatedWords">
+     <h3 id="generatedWordList">Generated Words here</h3>
+    </div>
+    </div>
+    <br /><br /><br />
     <footer><small>Copyright &copy; 2019, Antonio's Website</small></footer>
+    <div id="sampleID"></div>
+
+    <div id="what"></div>
   </body>
 </html>
