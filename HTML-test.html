@@ -10,24 +10,44 @@
     <title>Antonio's Website</title>
   </head>
   <body>
+    <nav class="navbar">
+      <span class="open-slide">
+        <a href="#" onclick="openSlideMenu()">
+          <svg width="30" height="30">
+            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+          </svg>
+        </a>
+      </span>
+      <ul class="navbar-nav">
+        <li> <a href="#">some</a></li>
+        <li> <a href="#">body</a></li>
+        <li> <a href="#">once</a></li>
+        <li> <a href="#">told</a></li>
+      </ul>
+    </nav>
+    <div id="side-menu" class="side-nav">
+      <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+      <a href="#">some</a>
+      <a href="#">body</a>
+      <a href="#">once</a>
+      <a href="#">told</a>
+    </div>
+    <div id="main">
     <header>
       <h1>Hello Stranger</h1>
     </header>
       <h2 class="margin">
         GOOD NEW IDEAS: Integrate youtube or some mp3 uploader so you can create lyrics and adjust without having to leave the page. Create more features for aiding this
         creation by being able to easily delete lines and add newly generated ones. Have the controls for parameters follow you as you scroll down and build it out. 
-        Also make the words easier to read and remove the commas.
-        Although after additional thought I would have to 3 versions, one for prefixes,
-        // 2nd for vowel.beginning, and 3rd for vowels.middle, this is for cases like vcvc, or cvc.
-        // Do the cv endings after constructing the additional rhymeGroups.
-        Try to make another thing that also submits onsubmit to make the display work. 
-        Smooth out word generation by removing 3 sets or more of repeating.
-        characters, and removing excess of more than 2 consecutive letters.
+        // Do the cv endings after constructing the additional rhymeGroups, after finishing up the rhyme part.
         When sanitizing inputs put cap on how high.
         Fill in the specifications then hit generate or press
         <i><strong>enter</strong></i
         >.
       </h2>
+      <div id="youtube">
       <div class="margin" id="positioning">
       <form name="woo"  >
         <div id="generationParameters">
@@ -63,17 +83,20 @@
         <br /> 
         <button type="button" onclick="OverlordAndInsert()">Generate random words</button>
         <br> <br>
-        <button type="submit">Reset</button>
+        <button type="button" onclick="deleteAll()">Delete All</button>
       </form>
     </div>
-    <div id="generatedWords">
-     <h3 id="generatedWordList">Generated Words here</h3>
+    <div id="wordList">
+    <h3 id="generatedWordList">Generated Words here</h3>
+    <div id="generatedWords"></div>
     </div>
     </div>
+    <div><h3>Youtube goes here.</h3></div>
+  </div>
     <br /><br /><br />
     <footer><small>Copyright &copy; 2019, Antonio's Website</small></footer>
-    <div id="sampleID"></div>
+  </div>
 
-    <div id="what"></div>
+
   </body>
 </html>

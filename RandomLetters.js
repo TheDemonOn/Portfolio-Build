@@ -1,3 +1,16 @@
+function openSlideMenu() {
+  document.getElementById("side-menu").style.width = "200px"
+  document.getElementById("main").style.marginLeft = "200px"
+}
+function closeSlideMenu() {
+  document.getElementById("side-menu").style.width = "0px"
+  document.getElementById("main").style.marginLeft = "0px"
+}
+
+
+
+
+
 let assembledWordsArray = []
 let assembledWord = []
 let assembledSentence = []
@@ -16,6 +29,8 @@ let wordInformation = {
   count: 0,
   line: 0,
 }
+
+
 
   //let letterStr = 'm'
   //let testStr = 'mmm'
@@ -56,7 +71,7 @@ function OVERLORD() {
   }
   structureGet()
 
-  if (structure == 1122) {
+  if (structure == 1122) { // Make this use aabb and allow all versions of casing.
     structureOrientation = rhymeStructure1122
   }
 
@@ -152,6 +167,9 @@ function OVERLORD() {
 
   if (gorientation == "")
 
+
+  // adding       assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+  // to structure that end in c
 
   function wordAssembleVV() {
     if (Math.floor(Math.random() * 4) > 0) {
@@ -361,6 +379,7 @@ function OVERLORD() {
         ]
       )
     } else {
+      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder[1]][
           Math.floor(
@@ -427,6 +446,7 @@ function OVERLORD() {
         ]
       )
     } else {
+      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder2[1]][
           Math.floor(
@@ -649,6 +669,7 @@ function OVERLORD() {
         ]
       )
     } else {
+      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder[1]][
           Math.floor(
@@ -708,6 +729,7 @@ function OVERLORD() {
         ]
       )
     } else {
+      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder2[1]][
           Math.floor(
@@ -1351,6 +1373,7 @@ function OVERLORD() {
         ]
       )
     } else {
+      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder[1]][
           Math.floor(
@@ -1417,6 +1440,7 @@ function OVERLORD() {
         ]
       )
     } else {
+      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder2[1]][
           Math.floor(
@@ -1608,8 +1632,10 @@ function OVERLORD() {
 
   function rhymeStructure1122() {
     if (wordInformation.line == 1) {
+      for (let z = 0; z < wordInformation.count; z++){
       rhyme1()
-      return wordBuild()
+      wordBuild()
+    }
     } else if (wordInformation.line % 2 === 0) {
       // If the word line is a multiple of 2
       for (let f = 0; f < wordInformation.line; f += 2) {
@@ -1779,9 +1805,11 @@ function insertWords() {
     }
     let div = document.createElement('div')
     div.id = Math.random()
+    div.xml
     div.style.fontFamily = 'arial'
     div.style.color = '#ffffff'
     div.style.fontSize = 'large'
+    div.style.lineHeight = "30px"
     div.onclick = function() {
       var id = this.id
       strId = id.toString()
@@ -1789,9 +1817,16 @@ function insertWords() {
       divLine.remove()
     }
     //div.addEventListener('click', deleteDiv) //This detects if div was clicked
-    div.innerHTML = words // This will be the content of a line
+    div.innerHTML = words.join(" ") // This will be the content of a line
 
     document.getElementById('generatedWords').appendChild(div)
+  }
+}
+
+function deleteAll() {
+  let rhymeLines = document.getElementById("generatedWords")
+  while(rhymeLines.firstChild) {
+    rhymeLines.removeChild(rhymeLines.firstChild)
   }
 }
 
