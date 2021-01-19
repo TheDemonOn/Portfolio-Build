@@ -7,35 +7,29 @@ function closeSlideMenu() {
   document.getElementById("main").style.marginLeft = "0px"
 }
 
-
-
-
-
 let assembledWordsArray = []
 let assembledWord = []
 let assembledSentence = []
 let keyHolder = []
 let keyHolder2 = []
-var gorientation = ''
-var structure = ''
+var gorientation = ""
+var structure = ""
 var precedingKey = []
 var precedingKey2 = []
-var baseRhyme = ''
-var rhyme1 = ''
-var rhyme2 = ''
-var rhymes1 = ''
-var rhymes2 = ''
+var baseRhyme = ""
+var rhyme1 = ""
+var rhyme2 = ""
+var rhymes1 = ""
+var rhymes2 = ""
 let wordInformation = {
   count: 0,
   line: 0,
 }
 
-
-
-  //let letterStr = 'm'
-  //let testStr = 'mmm'
-  //let letterRegex = new RegExp(letterStr + '{3,4}')
-  //console.log(testStr.match(letterRegex)[0])
+//let letterStr = 'm'
+//let testStr = 'mmm'
+//let letterRegex = new RegExp(letterStr + '{3,4}')
+//console.log(testStr.match(letterRegex)[0])
 function wordBuild() {
   // this simply combines the array of letters into one then resets everything for the next iteration
   for (let b = 0; b < assembledWordsArray.length; b++) {
@@ -43,35 +37,134 @@ function wordBuild() {
   }
   assembledSentence.push(assembledWord)
   assembledWordsArray.length = 0
-  assembledWord = ''
+  assembledWord = ""
 }
 
 let wordCount = []
 let vowelPrecedingCheckerRegex = /[aeiouyr]/
+
+let orientationArray = []
+
+let orientationArrayString = []
+
+let sanitizedOrientation = gorientation // This will be that regex output
+
+// This will be the first thing computed
+
+function orientationArrayBuilder(letterOrientation) {
+  // This would be run with sanitizedOrientation as the input
+  // Use Regex to sanitize this input for only "v, V, c, C"
+
+  // This should be a function that separates the sanitized letterOrientation into the array below into their own indexes
+
+  for (let i = 0; i < letterOrientation.length; i++) {
+    orientationArray.push(letterOrientation.slice(i, i + 1))
+  }
+}
+
+const convertToStringVersion = () => {
+  for (let e = 0; e < orientationArray.length; e++) {
+    if (orientationArray[e] === "v" || orientationArray[e] === "V") {
+      orientationArrayString.push("Vowels")
+    } else {
+      orientationArrayString.push("Consonants")
+    }
+  }
+}
+
+function wordAssembleBasicWord(orientArray) {
+  let orientationEndIndex = sanitizedOrientation.length - 1
+
+  for (let i = 0; i < orientArray.length; i++) {
+    // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
+
+    switch (i) {
+      // i is the index of the array which is going to tell whether to build a vowel or consonant
+      case 0:
+        // This will be the .beginning or .prefix
+        if (Math.floor(Math.random() * 4) > 0) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].beginning[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].beginning.length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].prefix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].prefix.length
+              )
+            ]
+          )
+        }
+        break
+      case orientationEndIndex:
+        // This will be the .end or .suffix
+        if (Math.floor(Math.random() * 4) > 0) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].end[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].end.length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].suffix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].suffix.length
+              )
+            ]
+          )
+        }
+        break
+      default:
+        // This will be the .middle
+        assembledWordsArray.push(
+          letterUnits[orientationArrayString[i]].middle[
+            Math.floor(
+              Math.random() *
+                letterUnits[orientationArrayString[i]].middle.length
+            )
+          ]
+        )
+        break
+    }
+  }
+}
+
+// Make the rhyme versions of the master function above and replace all the garbage individual functions
 
 function OVERLORD() {
   assembledSentence.length = 0 // This clears the queue of words so that it doesn't repeat
   // previous iterations.
 
   function letterCount() {
-    wordInformation.count = document.getElementById('WPL').value
+    wordInformation.count = document.getElementById("WPL").value
   }
   letterCount()
 
   function lineCount() {
-    wordInformation.line = document.getElementById('lineNumber').value
+    wordInformation.line = document.getElementById("lineNumber").value
   }
   lineCount()
   function orientation() {
-    gorientation = document.getElementById('graphemeStructure').value
+    gorientation = document.getElementById("graphemeStructure").value
   }
   orientation()
   function structureGet() {
-    structure = document.getElementById('vcvcStructure').value
+    structure = document.getElementById("vcvcStructure").value
   }
   structureGet()
 
-  if (structure == 1122) { // Make this use aabb and allow all versions of casing.
+  if (structure == 1122) {
+    // Make this use aabb and allow all versions of casing.
     structureOrientation = rhymeStructure1122
   }
 
@@ -79,10 +172,10 @@ function OVERLORD() {
     structureOrientation = rhymeStructure1212
   }
 
- // I think for the most part I don't really want to build any with 2 CC's in a row because the word generation 
- // is not fine like VV
+  // I think for the most part I don't really want to build any with 2 CC's in a row because the word generation
+  // is not fine like VV
 
-  if (gorientation == 'CVCV' || gorientation == 'cvcv') {
+  if (gorientation == "CVCV" || gorientation == "cvcv") {
     baseRhyme = wordAssembleCVCV
     rhyme1 = wordAssembleCVCVRhyme
     rhyme2 = wordAssembleCVCVRhyme2
@@ -90,7 +183,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleCVCVRhymes2
   }
 
-  if (gorientation == 'VCVC' || gorientation == 'vcvc') {
+  if (gorientation == "VCVC" || gorientation == "vcvc") {
     baseRhyme = wordAssembleVCVC
     rhyme1 = wordAssembleVCVCRhyme
     rhyme2 = wordAssembleVCVCRhyme2
@@ -98,7 +191,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleVCVCRhymes2
   }
 
-  if (gorientation == 'CVVC' || gorientation == 'cvvc') {
+  if (gorientation == "CVVC" || gorientation == "cvvc") {
     baseRhyme = wordAssembleCVVC
     rhyme1 = wordAssembleCVVCRhyme
     rhyme2 = wordAssembleCVVCRhyme2
@@ -106,7 +199,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleCVVCRhymes2
   }
 
-  if (gorientation == 'VCV' || gorientation == 'vcv') {
+  if (gorientation == "VCV" || gorientation == "vcv") {
     baseRhyme = wordAssembleVCV
     rhyme1 = wordAssembleVCVRhyme
     rhyme2 = wordAssembleVCVRhyme2
@@ -114,7 +207,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleVCVRhymes2
   }
 
-  if (gorientation == 'CVC' || gorientation == 'cvc') {
+  if (gorientation == "CVC" || gorientation == "cvc") {
     // A problem with words under this generation
     // is that it doesn't really rhyme if I just take the last consonant and attach it to the next,
     // unless it includes the previous connecting vowels
@@ -125,7 +218,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleCVCRhymes2
   }
 
-  if (gorientation == 'CVV' || gorientation == 'cvv') {
+  if (gorientation == "CVV" || gorientation == "cvv") {
     baseRhyme = wordAssembleCVV
     rhyme1 = wordAssembleCVVRhyme
     rhyme2 = wordAssembleCVVRhyme2
@@ -133,7 +226,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleCVVRhymes2
   }
 
-  if (gorientation == 'VVC' || gorientation == 'vvc') {
+  if (gorientation == "VVC" || gorientation == "vvc") {
     baseRhyme = wordAssembleVVC
     rhyme1 = wordAssembleVVCRhyme
     rhyme2 = wordAssembleVVCRhyme2
@@ -141,7 +234,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleVVCRhymes2
   }
 
-  if (gorientation == 'CV' || gorientation == 'cv') {
+  if (gorientation == "CV" || gorientation == "cv") {
     baseRhyme = wordAssembleCV
     rhyme1 = wordAssembleCVRhyme
     rhyme2 = wordAssembleCVRhyme2
@@ -149,7 +242,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleCVRhymes2
   }
 
-  if (gorientation == 'VC' || gorientation == 'vc') {
+  if (gorientation == "VC" || gorientation == "vc") {
     baseRhyme = wordAssembleVC
     rhyme1 = wordAssembleVCRhyme
     rhyme2 = wordAssembleVCRhyme2
@@ -157,7 +250,7 @@ function OVERLORD() {
     rhymes2 = wordAssembleVCRhymes2
   }
 
-  if (gorientation == 'VV' || gorientation == 'vv') {
+  if (gorientation == "VV" || gorientation == "vv") {
     baseRhyme = wordAssembleVV
     rhyme1 = wordAssembleVVRhyme
     rhyme2 = wordAssembleVVRhyme2
@@ -166,39 +259,33 @@ function OVERLORD() {
   }
 
   if (gorientation == "")
+    // adding       assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+    // to structure that end in c
 
-
-  // adding       assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
-  // to structure that end in c
-
-  function wordAssembleVV() {
-    if (Math.floor(Math.random() * 4) > 0) {
-      assembledWordsArray.push(
-        Vowels.beginning[
-          Math.floor(Math.random() * Vowels.beginning.length)
-        ]
-      )
-    } else {
-      assembledWordsArray.push(
-        Vowels.prefix[Math.floor(Math.random() * Vowels.prefix.length)]
-      )
+    function wordAssembleVV() {
+      if (Math.floor(Math.random() * 4) > 0) {
+        assembledWordsArray.push(
+          Vowels.beginning[Math.floor(Math.random() * Vowels.beginning.length)]
+        )
+      } else {
+        assembledWordsArray.push(
+          Vowels.prefix[Math.floor(Math.random() * Vowels.prefix.length)]
+        )
+      }
+      if (Math.floor(Math.random() * 4) > 0) {
+        assembledWordsArray.push(
+          Vowels.end[Math.floor(Math.random() * Vowels.end.length)]
+        )
+      } else {
+        assembledWordsArray.push(
+          Vowels.suffix[Math.floor(Math.random() * Vowels.suffix.length)]
+        )
+      }
     }
-    if (Math.floor(Math.random() * 4) > 0) {
-      assembledWordsArray.push(
-        Vowels.end[Math.floor(Math.random() * Vowels.end.length)]
-      )
-    } else {
-      assembledWordsArray.push(
-        Vowels.suffix[Math.floor(Math.random() * Vowels.suffix.length)]
-      )
-    }
-  }
   function wordAssembleVVRhyme() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Vowels.beginning[
-          Math.floor(Math.random() * Vowels.beginning.length)
-        ]
+        Vowels.beginning[Math.floor(Math.random() * Vowels.beginning.length)]
       )
     } else {
       assembledWordsArray.push(
@@ -211,7 +298,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -219,9 +306,7 @@ function OVERLORD() {
   function wordAssembleVVRhymes() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Vowels.beginning[
-          Math.floor(Math.random() * Vowels.beginning.length)
-        ]
+        Vowels.beginning[Math.floor(Math.random() * Vowels.beginning.length)]
       )
     } else {
       assembledWordsArray.push(
@@ -247,9 +332,7 @@ function OVERLORD() {
   function wordAssembleVVRhyme2() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Vowels.beginning[
-          Math.floor(Math.random() * Vowels.beginning.length)
-        ]
+        Vowels.beginning[Math.floor(Math.random() * Vowels.beginning.length)]
       )
     } else {
       assembledWordsArray.push(
@@ -262,7 +345,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -270,9 +353,7 @@ function OVERLORD() {
   function wordAssembleVVRhymes2() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Vowels.beginning[
-          Math.floor(Math.random() * Vowels.beginning.length)
-        ]
+        Vowels.beginning[Math.floor(Math.random() * Vowels.beginning.length)]
       )
     } else {
       assembledWordsArray.push(
@@ -295,11 +376,13 @@ function OVERLORD() {
       )
     }
   }
-//
+  //
   function wordAssembleCVVC() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Consonants.beginning[Math.floor(Math.random() * Consonants.beginning.length)]
+        Consonants.beginning[
+          Math.floor(Math.random() * Consonants.beginning.length)
+        ]
       )
     } else {
       assembledWordsArray.push(
@@ -326,7 +409,9 @@ function OVERLORD() {
   function wordAssembleCVVCRhyme() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Consonants.beginning[Math.floor(Math.random() * Consonants.beginning.length)]
+        Consonants.beginning[
+          Math.floor(Math.random() * Consonants.beginning.length)
+        ]
       )
     } else {
       assembledWordsArray.push(
@@ -348,7 +433,7 @@ function OVERLORD() {
       assembledWordsArray.push(Consonants.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Consonants.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Consonants.suffix[rhymeKey])
     }
@@ -356,7 +441,9 @@ function OVERLORD() {
   function wordAssembleCVVCRhymes() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Consonants.beginning[Math.floor(Math.random() * Consonants.beginning.length)]
+        Consonants.beginning[
+          Math.floor(Math.random() * Consonants.beginning.length)
+        ]
       )
     } else {
       assembledWordsArray.push(
@@ -379,7 +466,11 @@ function OVERLORD() {
         ]
       )
     } else {
-      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+      assembledWordsArray.push(
+        Consonants.suffixHelper[
+          Math.floor(Math.random() * Consonants.suffixHelper.length)
+        ]
+      )
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder[1]][
           Math.floor(
@@ -392,7 +483,9 @@ function OVERLORD() {
   function wordAssembleCVVCRhyme2() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Consonants.beginning[Math.floor(Math.random() * Consonants.beginning.length)]
+        Consonants.beginning[
+          Math.floor(Math.random() * Consonants.beginning.length)
+        ]
       )
     } else {
       assembledWordsArray.push(
@@ -414,7 +507,7 @@ function OVERLORD() {
       assembledWordsArray.push(Consonants.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Consonants.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Consonants.suffix[rhymeKey])
     }
@@ -422,7 +515,9 @@ function OVERLORD() {
   function wordAssembleCVVCRhymes2() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Consonants.beginning[Math.floor(Math.random() * Consonants.beginning.length)]
+        Consonants.beginning[
+          Math.floor(Math.random() * Consonants.beginning.length)
+        ]
       )
     } else {
       assembledWordsArray.push(
@@ -446,7 +541,11 @@ function OVERLORD() {
         ]
       )
     } else {
-      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+      assembledWordsArray.push(
+        Consonants.suffixHelper[
+          Math.floor(Math.random() * Consonants.suffixHelper.length)
+        ]
+      )
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder2[1]][
           Math.floor(
@@ -456,7 +555,7 @@ function OVERLORD() {
       )
     }
   }
-//
+  //
   function wordAssembleCVV() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
@@ -503,7 +602,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -560,7 +659,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -596,7 +695,7 @@ function OVERLORD() {
       )
     }
   }
-//
+  //
   function wordAssembleVVC() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
@@ -642,7 +741,7 @@ function OVERLORD() {
       assembledWordsArray.push(Consonants.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Consonants.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Consonants.suffix[rhymeKey])
     }
@@ -669,7 +768,11 @@ function OVERLORD() {
         ]
       )
     } else {
-      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+      assembledWordsArray.push(
+        Consonants.suffixHelper[
+          Math.floor(Math.random() * Consonants.suffixHelper.length)
+        ]
+      )
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder[1]][
           Math.floor(
@@ -701,7 +804,7 @@ function OVERLORD() {
       assembledWordsArray.push(Consonants.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Consonants.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Consonants.suffix[rhymeKey])
     }
@@ -729,7 +832,11 @@ function OVERLORD() {
         ]
       )
     } else {
-      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+      assembledWordsArray.push(
+        Consonants.suffixHelper[
+          Math.floor(Math.random() * Consonants.suffixHelper.length)
+        ]
+      )
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder2[1]][
           Math.floor(
@@ -739,7 +846,7 @@ function OVERLORD() {
       )
     }
   }
-//
+  //
   function wordAssembleCVV() {
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
@@ -786,7 +893,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -843,7 +950,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -879,7 +986,7 @@ function OVERLORD() {
       )
     }
   }
-//
+  //
   function wordAssembleCVC() {
     assembledWordsArray.push(
       Consonants.beginning[
@@ -1003,7 +1110,7 @@ function OVERLORD() {
       assembledWordsArray.push(Consonants.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Consonants.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Consonants.suffix[rhymeKey])
     }
@@ -1071,7 +1178,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -1122,7 +1229,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -1198,7 +1305,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -1253,7 +1360,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -1342,7 +1449,7 @@ function OVERLORD() {
       assembledWordsArray.push(Consonants.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Consonants.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Consonants.suffix[rhymeKey])
     }
@@ -1373,7 +1480,11 @@ function OVERLORD() {
         ]
       )
     } else {
-      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+      assembledWordsArray.push(
+        Consonants.suffixHelper[
+          Math.floor(Math.random() * Consonants.suffixHelper.length)
+        ]
+      )
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder[1]][
           Math.floor(
@@ -1408,7 +1519,7 @@ function OVERLORD() {
       assembledWordsArray.push(Consonants.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Consonants.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Consonants.suffix[rhymeKey])
     }
@@ -1440,7 +1551,11 @@ function OVERLORD() {
         ]
       )
     } else {
-      assembledWordsArray.push(Consonants.suffixHelper[Math.floor(Math.random() * Consonants.suffixHelper.length)])
+      assembledWordsArray.push(
+        Consonants.suffixHelper[
+          Math.floor(Math.random() * Consonants.suffixHelper.length)
+        ]
+      )
       assembledWordsArray.push(
         Consonants.suffixRhymeGroup[keyHolder2[1]][
           Math.floor(
@@ -1452,31 +1567,42 @@ function OVERLORD() {
   }
   //
   function wordAssembleCVCV() {
+    console.log("WORKES")
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Consonants.beginning[
-          Math.floor(Math.random() * Consonants.beginning.length)
+        letterUnits["Consonants"].beginning[
+          Math.floor(Math.random() * letterUnits["Consonants"].beginning.length)
         ]
       )
     } else {
       assembledWordsArray.push(
-        Consonants.prefix[Math.floor(Math.random() * Consonants.prefix.length)]
+        letterUnits["Consonants"].prefix[
+          Math.floor(Math.random() * letterUnits["Consonants"].prefix.length)
+        ]
       )
     }
     assembledWordsArray.push(
-      Vowels.middle[Math.floor(Math.random() * Vowels.middle.length)]
+      letterUnits["Vowels"].middle[
+        Math.floor(Math.random() * letterUnits["Vowels"].middle.length)
+      ]
     )
     assembledWordsArray.push(
-      Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
+      letterUnits["Consonants"].middle[
+        Math.floor(Math.random() * letterUnits["Consonants"].middle.length)
+      ]
     )
 
     if (Math.floor(Math.random() * 4) > 0) {
       assembledWordsArray.push(
-        Vowels.end[Math.floor(Math.random() * Vowels.end.length)]
+        letterUnits["Vowels"].end[
+          Math.floor(Math.random() * letterUnits["Vowels"].end.length)
+        ]
       )
     } else {
       assembledWordsArray.push(
-        Vowels.suffix[Math.floor(Math.random() * Vowels.suffix.length)]
+        letterUnits["Vowels"].suffix[
+          Math.floor(Math.random() * letterUnits["Vowels"].suffix.length)
+        ]
       )
     }
   }
@@ -1506,7 +1632,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder.push('')
+      keyHolder.push("")
       keyHolder.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -1571,7 +1697,7 @@ function OVERLORD() {
       assembledWordsArray.push(Vowels.end[rhymeKey])
     } else {
       let rhymeKey = Math.floor(Math.random() * Vowels.suffix.length)
-      keyHolder2.push('')
+      keyHolder2.push("")
       keyHolder2.push(rhymeKey)
       assembledWordsArray.push(Vowels.suffix[rhymeKey])
     }
@@ -1632,10 +1758,10 @@ function OVERLORD() {
 
   function rhymeStructure1122() {
     if (wordInformation.line == 1) {
-      for (let z = 0; z < wordInformation.count; z++){
-      rhyme1()
-      wordBuild()
-    }
+      for (let z = 0; z < wordInformation.count; z++) {
+        rhyme1()
+        wordBuild()
+      }
     } else if (wordInformation.line % 2 === 0) {
       // If the word line is a multiple of 2
       for (let f = 0; f < wordInformation.line; f += 2) {
@@ -1803,14 +1929,14 @@ function insertWords() {
     for (let j = 0; j < wordInformation.count; j++) {
       words.push(assembledSentence.shift())
     }
-    let div = document.createElement('div')
+    let div = document.createElement("div")
     div.id = Math.random()
     div.xml
-    div.style.fontFamily = 'arial'
-    div.style.color = '#ffffff'
-    div.style.fontSize = 'large'
+    div.style.fontFamily = "arial"
+    div.style.color = "#ffffff"
+    div.style.fontSize = "large"
     div.style.lineHeight = "30px"
-    div.onclick = function() {
+    div.onclick = function () {
       var id = this.id
       strId = id.toString()
       let divLine = document.getElementById(strId)
@@ -1819,13 +1945,13 @@ function insertWords() {
     //div.addEventListener('click', deleteDiv) //This detects if div was clicked
     div.innerHTML = words.join(" ") // This will be the content of a line
 
-    document.getElementById('generatedWords').appendChild(div)
+    document.getElementById("generatedWords").appendChild(div)
   }
 }
 
 function deleteAll() {
   let rhymeLines = document.getElementById("generatedWords")
-  while(rhymeLines.firstChild) {
+  while (rhymeLines.firstChild) {
     rhymeLines.removeChild(rhymeLines.firstChild)
   }
 }
