@@ -138,6 +138,342 @@ function wordAssembleBasicWord(orientArray) {
     }
   }
 }
+function wordAssembleRhyme(orientArray) {
+  let orientationEndIndex = sanitizedOrientation.length - 1
+
+  for (let i = 0; i < orientArray.length; i++) {
+    // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
+
+    // have to figure out how to involve a preceding rhymeKey
+    switch (i) {
+      // i is the index of the array which is going to tell whether to build a vowel or consonant
+      case 0:
+        // This will be the .beginning or .prefix
+        if (Math.floor(Math.random() * 4) > 0) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].beginning[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].beginning.length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].prefix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].prefix.length
+              )
+            ]
+          )
+        }
+        break
+      case orientationEndIndex:
+        // This will be the .end or .suffix
+        if (Math.floor(Math.random() * 4) > 0) {
+          let rhymeKey =
+            letterUnits[orientationArrayString[i]].end[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].end.length
+              )
+            ]
+          keyHolder.push(rhymeKey)
+          assembledWordsArray.push(rhymeKey)
+        } else {
+          let rhymeKey =
+            letterUnits[orientationArrayString[i]].suffix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].suffix.length
+              )
+            ]
+          keyHolder.push("") // for making keyHolder[1] a suffix
+          keyHolder.push(rhymeKey)
+          assembledWordsArray.push(rhymeKey)
+        }
+        break
+      default:
+        // This will be the .middle
+        assembledWordsArray.push(
+          letterUnits[orientationArrayString[i]].middle[
+            Math.floor(
+              Math.random() *
+                letterUnits[orientationArrayString[i]].middle.length
+            )
+          ]
+        )
+        break
+    }
+  }
+}
+function wordAssembleRhymes(orientArray) {
+  let orientationEndIndex = sanitizedOrientation.length - 1
+
+  for (let i = 0; i < orientArray.length; i++) {
+    switch (i) {
+      case 0:
+        // This will be the .beginning or .prefix
+        if (Math.floor(Math.random() * 4) > 0) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].beginning[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].beginning.length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].prefix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].prefix.length
+              )
+            ]
+          )
+        }
+        break
+      case orientationEndIndex:
+        // This will be the .end or .suffix depending on the keyHolder.length
+        if (keyHolder.length == 1) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].endRhymeGroup[keyHolder[0]][
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].endRhymeGroup[
+                    keyHolder[0]
+                  ].length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].suffixRhymeGroup[
+              keyHolder[1]
+            ][
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].suffixRhymeGroup[
+                    keyHolder[1]
+                  ].length
+              )
+            ]
+          )
+        }
+        break
+      default:
+        // This will be the .middle
+        assembledWordsArray.push(
+          letterUnits[orientationArrayString[i]].middle[
+            Math.floor(
+              Math.random() *
+                letterUnits[orientationArrayString[i]].middle.length
+            )
+          ]
+        )
+        break
+    }
+  }
+
+  if (Math.floor(Math.random() * 4) > 0) {
+    assembledWordsArray.push(
+      Consonants.beginning[
+        Math.floor(Math.random() * Consonants.beginning.length)
+      ]
+    )
+  } else {
+    assembledWordsArray.push(
+      Consonants.prefix[Math.floor(Math.random() * Consonants.prefix.length)]
+    )
+  }
+  assembledWordsArray.push(
+    Vowels.middle[Math.floor(Math.random() * Vowels.middle.length)]
+  )
+  assembledWordsArray.push(
+    Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
+  )
+  if (keyHolder.length == 1) {
+    assembledWordsArray.push(
+      Vowels.endRhymeGroup[keyHolder[0]][
+        Math.floor(Math.random() * Vowels.endRhymeGroup[keyHolder[0]].length)
+      ]
+    )
+  } else {
+    assembledWordsArray.push(
+      Vowels.suffixRhymeGroup[keyHolder[1]][
+        Math.floor(Math.random() * Vowels.suffixRhymeGroup[keyHolder[1]].length)
+      ]
+    )
+  }
+}
+function wordAssembleRhyme2(orientArray) {
+  let orientationEndIndex = sanitizedOrientation.length - 1
+
+  for (let i = 0; i < orientArray.length; i++) {
+    switch (i) {
+      case 0:
+        // This will be the .beginning or .prefix
+        if (Math.floor(Math.random() * 4) > 0) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].beginning[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].beginning.length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].prefix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].prefix.length
+              )
+            ]
+          )
+        }
+        break
+      case orientationEndIndex:
+        // This will be the .end or .suffix
+        if (Math.floor(Math.random() * 4) > 0) {
+          let rhymeKey =
+            letterUnits[orientationArrayString[i]].end[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].end.length
+              )
+            ]
+          keyHolder2.push(rhymeKey)
+          assembledWordsArray.push(rhymeKey)
+        } else {
+          let rhymeKey =
+            letterUnits[orientationArrayString[i]].suffix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].suffix.length
+              )
+            ]
+          keyHolder2.push("") // for making keyHolder2[1] a suffix
+          keyHolder2.push(rhymeKey)
+          assembledWordsArray.push(rhymeKey)
+        }
+        break
+      default:
+        // This will be the .middle
+        assembledWordsArray.push(
+          letterUnits[orientationArrayString[i]].middle[
+            Math.floor(
+              Math.random() *
+                letterUnits[orientationArrayString[i]].middle.length
+            )
+          ]
+        )
+        break
+    }
+  }
+}
+function wordAssembleRhymes(orientArray) {
+  let orientationEndIndex = sanitizedOrientation.length - 1
+
+  for (let i = 0; i < orientArray.length; i++) {
+    switch (i) {
+      case 0:
+        // This will be the .beginning or .prefix
+        if (Math.floor(Math.random() * 4) > 0) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].beginning[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].beginning.length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].prefix[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].prefix.length
+              )
+            ]
+          )
+        }
+        break
+      case orientationEndIndex:
+        // This will be the .end or .suffix depending on the keyHolder.length
+        if (keyHolder2.length == 1) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].endRhymeGroup[keyHolder2[0]][
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].endRhymeGroup[
+                    keyHolder2[0]
+                  ].length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].suffixRhymeGroup[
+              keyHolder2[1]
+            ][
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].suffixRhymeGroup[
+                    keyHolder2[1]
+                  ].length
+              )
+            ]
+          )
+        }
+        break
+      default:
+        // This will be the .middle
+        assembledWordsArray.push(
+          letterUnits[orientationArrayString[i]].middle[
+            Math.floor(
+              Math.random() *
+                letterUnits[orientationArrayString[i]].middle.length
+            )
+          ]
+        )
+        break
+    }
+  }
+
+  if (Math.floor(Math.random() * 4) > 0) {
+    assembledWordsArray.push(
+      Consonants.beginning[
+        Math.floor(Math.random() * Consonants.beginning.length)
+      ]
+    )
+  } else {
+    assembledWordsArray.push(
+      Consonants.prefix[Math.floor(Math.random() * Consonants.prefix.length)]
+    )
+  }
+  assembledWordsArray.push(
+    Vowels.middle[Math.floor(Math.random() * Vowels.middle.length)]
+  )
+  assembledWordsArray.push(
+    Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
+  )
+  if (keyHolder.length == 1) {
+    assembledWordsArray.push(
+      Vowels.endRhymeGroup[keyHolder[0]][
+        Math.floor(Math.random() * Vowels.endRhymeGroup[keyHolder[0]].length)
+      ]
+    )
+  } else {
+    assembledWordsArray.push(
+      Vowels.suffixRhymeGroup[keyHolder[1]][
+        Math.floor(Math.random() * Vowels.suffixRhymeGroup[keyHolder[1]].length)
+      ]
+    )
+  }
+}
 
 // Make the rhyme versions of the master function above and replace all the garbage individual functions
 
