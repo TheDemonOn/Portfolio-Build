@@ -276,37 +276,6 @@ function wordAssembleRhymes(orientArray) {
         break
     }
   }
-
-  if (Math.floor(Math.random() * 4) > 0) {
-    assembledWordsArray.push(
-      Consonants.beginning[
-        Math.floor(Math.random() * Consonants.beginning.length)
-      ]
-    )
-  } else {
-    assembledWordsArray.push(
-      Consonants.prefix[Math.floor(Math.random() * Consonants.prefix.length)]
-    )
-  }
-  assembledWordsArray.push(
-    Vowels.middle[Math.floor(Math.random() * Vowels.middle.length)]
-  )
-  assembledWordsArray.push(
-    Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
-  )
-  if (keyHolder.length == 1) {
-    assembledWordsArray.push(
-      Vowels.endRhymeGroup[keyHolder[0]][
-        Math.floor(Math.random() * Vowels.endRhymeGroup[keyHolder[0]].length)
-      ]
-    )
-  } else {
-    assembledWordsArray.push(
-      Vowels.suffixRhymeGroup[keyHolder[1]][
-        Math.floor(Math.random() * Vowels.suffixRhymeGroup[keyHolder[1]].length)
-      ]
-    )
-  }
 }
 function wordAssembleRhyme2(orientArray) {
   let orientationEndIndex = sanitizedOrientation.length - 1
@@ -374,7 +343,7 @@ function wordAssembleRhyme2(orientArray) {
     }
   }
 }
-function wordAssembleRhymes(orientArray) {
+function wordAssembleRhymes2(orientArray) {
   let orientationEndIndex = sanitizedOrientation.length - 1
 
   for (let i = 0; i < orientArray.length; i++) {
@@ -441,37 +410,6 @@ function wordAssembleRhymes(orientArray) {
         )
         break
     }
-  }
-
-  if (Math.floor(Math.random() * 4) > 0) {
-    assembledWordsArray.push(
-      Consonants.beginning[
-        Math.floor(Math.random() * Consonants.beginning.length)
-      ]
-    )
-  } else {
-    assembledWordsArray.push(
-      Consonants.prefix[Math.floor(Math.random() * Consonants.prefix.length)]
-    )
-  }
-  assembledWordsArray.push(
-    Vowels.middle[Math.floor(Math.random() * Vowels.middle.length)]
-  )
-  assembledWordsArray.push(
-    Consonants.middle[Math.floor(Math.random() * Consonants.middle.length)]
-  )
-  if (keyHolder.length == 1) {
-    assembledWordsArray.push(
-      Vowels.endRhymeGroup[keyHolder[0]][
-        Math.floor(Math.random() * Vowels.endRhymeGroup[keyHolder[0]].length)
-      ]
-    )
-  } else {
-    assembledWordsArray.push(
-      Vowels.suffixRhymeGroup[keyHolder[1]][
-        Math.floor(Math.random() * Vowels.suffixRhymeGroup[keyHolder[1]].length)
-      ]
-    )
   }
 }
 
