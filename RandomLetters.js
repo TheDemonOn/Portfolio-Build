@@ -40,9 +40,6 @@ function wordBuild() {
   assembledWordsArray.length = 0
   assembledWord = ""
   console.log(orientationArrayString)
-  // These KeyHolder.pop's remove the potential 1 or 2 entries in KeyHolder if a rhyming word was just built
-  keyHolder.pop()
-  keyHolder.pop()
 }
 
 let wordCount = []
@@ -147,7 +144,8 @@ function wordAssembleBasicWord() {
   }
 }
 function wordAssembleRhyme() {
-  let orientationEndIndex = sanitizedOrientation.length - 1
+  // let orientationEndIndex = sanitizedOrientation.length - 1
+  let orientationEndIndex = orientationArray.length - 1
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
@@ -180,26 +178,24 @@ function wordAssembleRhyme() {
       case orientationEndIndex:
         // This will be the .end or .suffix
         if (Math.floor(Math.random() * 4) > 0) {
-          let rhymeKey =
-            letterUnits[orientationArrayString[i]].end[
-              Math.floor(
-                Math.random() *
-                  letterUnits[orientationArrayString[i]].end.length
-              )
-            ]
+          let rhymeKey = Math.floor(
+            Math.random() * letterUnits[orientationArrayString[i]].end.length
+          )
+
           keyHolder.push(rhymeKey)
-          assembledWordsArray.push(rhymeKey)
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].end[rhymeKey]
+          )
         } else {
-          let rhymeKey =
-            letterUnits[orientationArrayString[i]].suffix[
-              Math.floor(
-                Math.random() *
-                  letterUnits[orientationArrayString[i]].suffix.length
-              )
-            ]
+          let rhymeKey = Math.floor(
+            Math.random() * letterUnits[orientationArrayString[i]].suffix.length
+          )
+
           keyHolder.push("") // for making keyHolder[1] a suffix
           keyHolder.push(rhymeKey)
-          assembledWordsArray.push(rhymeKey)
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].suffix[rhymeKey]
+          )
         }
         break
       default:
@@ -217,7 +213,8 @@ function wordAssembleRhyme() {
   }
 }
 function wordAssembleRhymes() {
-  let orientationEndIndex = sanitizedOrientation.length - 1
+  // let orientationEndIndex = sanitizedOrientation.length - 1
+  let orientationEndIndex = orientationArray.length - 1
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
@@ -245,6 +242,7 @@ function wordAssembleRhymes() {
         break
       case orientationEndIndex:
         // This will be the .end or .suffix depending on the keyHolder.length
+        console.log(keyHolder)
         if (keyHolder.length == 1) {
           assembledWordsArray.push(
             letterUnits[orientationArrayString[i]].endRhymeGroup[keyHolder[0]][
@@ -284,9 +282,13 @@ function wordAssembleRhymes() {
         break
     }
   }
+  // Removing the rhyming keyHolders once the rhyming portion has been built
+  keyHolder.pop()
+  keyHolder.pop()
 }
 function wordAssembleRhyme2() {
-  let orientationEndIndex = sanitizedOrientation.length - 1
+  // let orientationEndIndex = sanitizedOrientation.length - 1
+  let orientationEndIndex = orientationArray.length - 1
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
@@ -315,26 +317,22 @@ function wordAssembleRhyme2() {
       case orientationEndIndex:
         // This will be the .end or .suffix
         if (Math.floor(Math.random() * 4) > 0) {
-          let rhymeKey =
-            letterUnits[orientationArrayString[i]].end[
-              Math.floor(
-                Math.random() *
-                  letterUnits[orientationArrayString[i]].end.length
-              )
-            ]
+          let rhymeKey = Math.floor(
+            Math.random() * letterUnits[orientationArrayString[i]].end.length
+          )
           keyHolder2.push(rhymeKey)
-          assembledWordsArray.push(rhymeKey)
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].end[rhymeKey]
+          )
         } else {
-          let rhymeKey =
-            letterUnits[orientationArrayString[i]].suffix[
-              Math.floor(
-                Math.random() *
-                  letterUnits[orientationArrayString[i]].suffix.length
-              )
-            ]
+          let rhymeKey = Math.floor(
+            Math.random() * letterUnits[orientationArrayString[i]].suffix.length
+          )
           keyHolder2.push("") // for making keyHolder2[1] a suffix
           keyHolder2.push(rhymeKey)
-          assembledWordsArray.push(rhymeKey)
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].suffix[rhymeKey]
+          )
         }
         break
       default:
@@ -352,7 +350,8 @@ function wordAssembleRhyme2() {
   }
 }
 function wordAssembleRhymes2() {
-  let orientationEndIndex = sanitizedOrientation.length - 1
+  // let orientationEndIndex = sanitizedOrientation.length - 1
+  let orientationEndIndex = orientationArray.length - 1
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
@@ -419,6 +418,8 @@ function wordAssembleRhymes2() {
         break
     }
   }
+  keyHolder2.pop()
+  keyHolder2.pop()
 }
 
 // Make the rhyme versions of the master function above and replace all the garbage individual functions
@@ -481,7 +482,7 @@ function OVERLORD() {
       for (let f = 0; f < wordInformation.line; f += 2) {
         // This will generate 2 lines at a time
         for (let p = 0; p < wordInformation.count - 1; p++) {
-          // This will build as many words as is asked
+          // This will build as many words as specified
           baseRhyme()
           wordBuild()
         }
@@ -640,6 +641,7 @@ function insertWords() {
     div.style.fontSize = "large"
     div.style.lineHeight = "30px"
     div.onclick = function () {
+      // This ties a function of onclick to each div created which reads the element's id and deletes it
       var id = this.id
       strId = id.toString()
       let divLine = document.getElementById(strId)
