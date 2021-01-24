@@ -32,14 +32,13 @@ let wordInformation = {
 //console.log(testStr.match(letterRegex)[0])
 function wordBuild() {
   // this simply combines the array of letters into one then resets everything for the next iteration
-  console.log(assembledWordsArray)
   for (let b = 0; b < assembledWordsArray.length; b++) {
     assembledWord = assembledWord + assembledWordsArray[b]
   }
+  console.log(assembledWordsArray)
   assembledSentence.push(assembledWord)
   assembledWordsArray.length = 0
   assembledWord = ""
-  console.log(orientationArrayString)
 }
 
 let wordCount = []
@@ -50,8 +49,6 @@ let orientationArray = []
 let orientationArrayString = []
 
 let sanitizedOrientation = gorientation // This will be that regex output
-
-// This will be the first thing computed
 
 function orientationArrayBuilder(letterOrientation) {
   // This would be run with sanitizedOrientation as the input
@@ -75,7 +72,6 @@ const convertToStringVersion = () => {
     }
   }
 }
-
 function wordAssembleBasicWord() {
   // let orientationEndIndex = sanitizedOrientation.length - 1
   let orientationEndIndex = orientationArray.length - 1
@@ -144,13 +140,12 @@ function wordAssembleBasicWord() {
   }
 }
 function wordAssembleRhyme() {
-  // let orientationEndIndex = sanitizedOrientation.length - 1
   let orientationEndIndex = orientationArray.length - 1
+  let orientationPreceding = orientationArray.length - 2
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
 
-    // have to figure out how to involve a preceding rhymeKey
     switch (i) {
       // i is the index of the array which is going to tell whether to build a vowel or consonant
       case 0:
@@ -198,6 +193,30 @@ function wordAssembleRhyme() {
           )
         }
         break
+      case orientationPreceding:
+        // This will create a key if the last grapheme is a Consonant type and the one before is a Vowel type
+        if (
+          orientationArrayString[i] === "Vowels" &&
+          orientationArrayString[i + 1] === "Consonants"
+        ) {
+          let precedingValue = Math.floor(
+            Math.random() * letterUnits[orientationArrayString[i]].middle.length
+          )
+          precedingKey.push(precedingValue)
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middle[precedingValue]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middle[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].middle.length
+              )
+            ]
+          )
+        }
+        break
       default:
         // This will be the .middle
         assembledWordsArray.push(
@@ -213,9 +232,8 @@ function wordAssembleRhyme() {
   }
 }
 function wordAssembleRhymes() {
-  // let orientationEndIndex = sanitizedOrientation.length - 1
   let orientationEndIndex = orientationArray.length - 1
-
+  let orientationPreceding = orientationArray.length - 2
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
       case 0:
@@ -242,7 +260,6 @@ function wordAssembleRhymes() {
         break
       case orientationEndIndex:
         // This will be the .end or .suffix depending on the keyHolder.length
-        console.log(keyHolder)
         if (keyHolder.length == 1) {
           assembledWordsArray.push(
             letterUnits[orientationArrayString[i]].endRhymeGroup[keyHolder[0]][
@@ -269,6 +286,40 @@ function wordAssembleRhymes() {
           )
         }
         break
+      case orientationPreceding:
+        console.log(precedingKey[0])
+        // How strange
+        // When this log is true it usually results in undefined for the .push
+        // Yet when this results in undefined it produces the correct result in .push: not always though
+        //
+        // I suspect It may not be using the intended Vowel vs Consonant: It is correct
+        if (
+          orientationArrayString[i] === "Vowels" &&
+          orientationArrayString[i + 1] === "Consonants"
+        ) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middleRhymeGroup[
+              precedingKey[0]
+            ][
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].middleRhymeGroup[
+                    precedingKey[0]
+                  ].length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middle[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].middle.length
+              )
+            ]
+          )
+        }
+        break
       default:
         // This will be the .middle
         assembledWordsArray.push(
@@ -283,13 +334,14 @@ function wordAssembleRhymes() {
     }
   }
   // Removing the rhyming keyHolders once the rhyming portion has been built
+  precedingKey.pop()
   keyHolder.pop()
   keyHolder.pop()
 }
 function wordAssembleRhyme2() {
-  // let orientationEndIndex = sanitizedOrientation.length - 1
   let orientationEndIndex = orientationArray.length - 1
-
+  let orientationPreceding = orientationArray.length - 2
+  console.log("HOW ABOUT THIS")
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
       case 0:
@@ -335,6 +387,32 @@ function wordAssembleRhyme2() {
           )
         }
         break
+      case orientationPreceding:
+        // This will create a key if the last grapheme is a Consonant type and the one before is a Vowel type
+        if (
+          orientationArrayString[i] === "Vowels" &&
+          orientationArrayString[i + 1] === "Consonants"
+        ) {
+          let precedingValue = Math.floor(
+            Math.random() * letterUnits[orientationArrayString[i]].middle.length
+          )
+          console.log(precedingKey2)
+          precedingKey2.push(precedingValue)
+          console.log(precedingKey2)
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middle[precedingValue]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middle[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].middle.length
+              )
+            ]
+          )
+        }
+        break
       default:
         // This will be the .middle
         assembledWordsArray.push(
@@ -350,8 +428,10 @@ function wordAssembleRhyme2() {
   }
 }
 function wordAssembleRhymes2() {
-  // let orientationEndIndex = sanitizedOrientation.length - 1
   let orientationEndIndex = orientationArray.length - 1
+  let orientationPreceding = orientationArray.length - 2
+  console.log(precedingKey2[0])
+  console.log("HELLOW")
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
@@ -405,6 +485,34 @@ function wordAssembleRhymes2() {
           )
         }
         break
+      case orientationPreceding:
+        if (
+          orientationArrayString[i] === "Vowels" &&
+          orientationArrayString[i + 1] === "Consonants"
+        ) {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middleRhymeGroup[
+              precedingKey2[0]
+            ][
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].middleRhymeGroup[
+                    precedingKey2[0]
+                  ].length
+              )
+            ]
+          )
+        } else {
+          assembledWordsArray.push(
+            letterUnits[orientationArrayString[i]].middle[
+              Math.floor(
+                Math.random() *
+                  letterUnits[orientationArrayString[i]].middle.length
+              )
+            ]
+          )
+        }
+        break
       default:
         // This will be the .middle
         assembledWordsArray.push(
@@ -418,6 +526,7 @@ function wordAssembleRhymes2() {
         break
     }
   }
+  precedingKey2.pop()
   keyHolder2.pop()
   keyHolder2.pop()
 }
@@ -468,19 +577,17 @@ function OVERLORD() {
   rhyme2 = wordAssembleRhyme2
   rhymes2 = wordAssembleRhymes2
 
-  // Each structure builds up to 4 words at a time, only being less if there
-  // are not enough words.
-
+  // Use the rhyme 2 for lines 3 & 4
   function rhymeStructure1122() {
     if (wordInformation.line == 1) {
       for (let z = 0; z < wordInformation.count; z++) {
         rhyme1()
         wordBuild()
       }
-    } else if (wordInformation.line % 2 === 0) {
+    } else if (wordInformation.line % 4 === 0) {
       // If the word line is a multiple of 2
-      for (let f = 0; f < wordInformation.line; f += 2) {
-        // This will generate 2 lines at a time
+      for (let f = 0; f < wordInformation.line; f += 4) {
+        // This will generate 4 lines at a time
         for (let p = 0; p < wordInformation.count - 1; p++) {
           // This will build as many words as specified
           baseRhyme()
@@ -495,15 +602,27 @@ function OVERLORD() {
         }
         rhymes1()
         wordBuild()
+        // Third and fourth Lines
+        for (let p = 0; p < wordInformation.count - 1; p++) {
+          // This will build as many words as specified
+          baseRhyme()
+          wordBuild()
+        }
+        rhyme2()
+        wordBuild()
+        // This is the second line.
+        for (let r = 0; r < wordInformation.count - 1; r++) {
+          baseRhyme()
+          wordBuild()
+        }
+        rhymes2()
+        wordBuild()
       }
     } else {
       // More than one line but not a multiple of two.
       for (let f = 0; f < wordInformation.line - 2; f += 2) {
         // This will generate 2 lines at a time
-        keyHolder.pop()
-        keyHolder.pop()
         for (let p = 0; p < wordInformation.count - 1; p++) {
-          // Perhaps simplify this to a function?
           baseRhyme()
           wordBuild()
         }
