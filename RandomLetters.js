@@ -145,7 +145,6 @@ function wordAssembleRhyme() {
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
-
     switch (i) {
       // i is the index of the array which is going to tell whether to build a vowel or consonant
       case 0:
@@ -287,12 +286,6 @@ function wordAssembleRhymes() {
         }
         break
       case orientationPreceding:
-        console.log(precedingKey[0])
-        // How strange
-        // When this log is true it usually results in undefined for the .push
-        // Yet when this results in undefined it produces the correct result in .push: not always though
-        //
-        // I suspect It may not be using the intended Vowel vs Consonant: It is correct
         if (
           orientationArrayString[i] === "Vowels" &&
           orientationArrayString[i + 1] === "Consonants"
@@ -577,84 +570,45 @@ function OVERLORD() {
   rhyme2 = wordAssembleRhyme2
   rhymes2 = wordAssembleRhymes2
 
-  // Use the rhyme 2 for lines 3 & 4
   function rhymeStructure1122() {
-    if (wordInformation.line == 1) {
-      for (let z = 0; z < wordInformation.count; z++) {
-        rhyme1()
-        wordBuild()
-      }
-    } else if (wordInformation.line % 4 === 0) {
-      // If the word line is a multiple of 2
-      for (let f = 0; f < wordInformation.line; f += 4) {
-        // This will generate 4 lines at a time
-        for (let p = 0; p < wordInformation.count - 1; p++) {
-          // This will build as many words as specified
-          baseRhyme()
-          wordBuild()
-        }
-        rhyme1()
-        wordBuild()
-        // This is the second line.
-        for (let r = 0; r < wordInformation.count - 1; r++) {
-          baseRhyme()
-          wordBuild()
-        }
-        rhymes1()
-        wordBuild()
-        // Third and fourth Lines
-        for (let p = 0; p < wordInformation.count - 1; p++) {
-          // This will build as many words as specified
-          baseRhyme()
-          wordBuild()
-        }
-        rhyme2()
-        wordBuild()
-        // This is the second line.
-        for (let r = 0; r < wordInformation.count - 1; r++) {
-          baseRhyme()
-          wordBuild()
-        }
-        rhymes2()
-        wordBuild()
-      }
-    } else {
-      // More than one line but not a multiple of two.
-      for (let f = 0; f < wordInformation.line - 2; f += 2) {
-        // This will generate 2 lines at a time
-        for (let p = 0; p < wordInformation.count - 1; p++) {
-          baseRhyme()
-          wordBuild()
-        }
-        rhyme1()
-        wordBuild()
-        // This is the second line.
-        for (let r = 0; r < wordInformation.count - 1; r++) {
-          baseRhyme()
-          wordBuild()
-        }
-        rhymes1()
-        wordBuild()
-      }
-      for (let r = 0; r < wordInformation.count; r++) {
-        // This doesn't rhyme anything because
-        // of the structure chosen so it just builds as many words as there should be.
+    for (let f = 0; f < wordInformation.line; f += 4) {
+      // This will generate 4 lines at a time because there is no downside to
+      // over producing lines here because only the correct amount will display
+      for (let p = 0; p < wordInformation.count - 1; p++) {
+        // This will build as many words as specified minus the one that is built below for storing rhymeKeys and using them
         baseRhyme()
         wordBuild()
       }
+      rhyme1()
+      wordBuild()
+      // This is the second line.
+      for (let r = 0; r < wordInformation.count - 1; r++) {
+        baseRhyme()
+        wordBuild()
+      }
+      rhymes1()
+      wordBuild()
+      // Third and fourth Lines
+      for (let p = 0; p < wordInformation.count - 1; p++) {
+        // This will build as many words as specified
+        baseRhyme()
+        wordBuild()
+      }
+      rhyme2()
+      wordBuild()
+      // This is the second line.
+      for (let r = 0; r < wordInformation.count - 1; r++) {
+        baseRhyme()
+        wordBuild()
+      }
+      rhymes2()
+      wordBuild()
     }
   }
 
-  //rhymeStructure1122() // For testing 1122
-
   function rhymeStructure1212() {
-    let remainder = wordInformation.line % 4 // This will help determine how many extra lines to run
-    let determiner = wordInformation.line - remainder
-    let fullRuns = determiner / 4
-
-    for (let p = 0; p < fullRuns; p++) {
-      keyHolder.pop()
-      keyHolder.pop() // This clears rhymeKey for the next word.
+    // Once again there is no downside to over producing lines because insertWords will only display as many lines as is proper
+    for (let p = 0; p < wordInformation.line; p += 4) {
       for (let p = 0; p < wordInformation.count - 1; p++) {
         baseRhyme()
         wordBuild()
@@ -662,8 +616,6 @@ function OVERLORD() {
       rhyme1()
       wordBuild()
       // This is the second line.
-      keyHolder2.pop()
-      keyHolder2.pop()
       for (let r = 0; r < wordInformation.count - 1; r++) {
         baseRhyme()
         wordBuild()
@@ -675,7 +627,7 @@ function OVERLORD() {
         baseRhyme()
         wordBuild()
       }
-      rhymes1() // The Reason these lines don't need the keyHolder.pop is because it is a rhymes not a rhyme
+      rhymes1()
       wordBuild()
       // Fourth line starts here
       for (let p = 0; p < wordInformation.count - 1; p++) {
@@ -683,53 +635,6 @@ function OVERLORD() {
         wordBuild()
       }
       rhymes2()
-      wordBuild()
-    }
-
-    if (remainder === 1) {
-      for (let p = 0; p < wordInformation.count; p++) {
-        baseRhyme()
-        wordBuild()
-      }
-    } else if (remainder === 2) {
-      for (let p = 0; p < wordInformation.count - 1; p++) {
-        baseRhyme()
-        wordBuild()
-      }
-      keyHolder.pop()
-      keyHolder.pop()
-      rhyme1()
-      wordBuild()
-      for (let p = 0; p < wordInformation.count - 1; p++) {
-        baseRhyme()
-        wordBuild()
-      }
-      keyHolder2.pop()
-      keyHolder2.pop()
-      rhyme2()
-      wordBuild()
-    } else if (remainder === 3) {
-      for (let p = 0; p < wordInformation.count - 1; p++) {
-        baseRhyme()
-        wordBuild()
-      }
-      keyHolder.pop()
-      keyHolder.pop()
-      rhyme1()
-      wordBuild()
-      for (let p = 0; p < wordInformation.count - 1; p++) {
-        baseRhyme()
-        wordBuild()
-      }
-      keyHolder2.pop()
-      keyHolder2.pop()
-      rhyme2()
-      wordBuild()
-      for (let p = 0; p < wordInformation.count - 1; p++) {
-        baseRhyme()
-        wordBuild()
-      }
-      rhymes1()
       wordBuild()
     }
   }
