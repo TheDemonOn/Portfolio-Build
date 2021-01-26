@@ -2,6 +2,10 @@ body {
   overflow-x: hidden;
 }
 
+iframe {
+  border: 0px
+}
+
 h1 {
   color: rgb(216, 240, 252);
   font-family: arial;
@@ -101,6 +105,15 @@ ol {
 #youtube {
   display: flex;
   flex-direction: column;
+}
+
+#player {
+  position: fixed;
+
+  /* bottom: 3em; */
+  bottom: 10em;
+  /* left: -10em */
+
 }
 
 #main {

@@ -523,7 +523,6 @@ function wordAssembleRhymes2() {
   keyHolder2.pop()
   keyHolder2.pop()
 }
-
 // Make the rhyme versions of the master function above and replace all the garbage individual functions
 
 function OVERLORD() {
@@ -675,6 +674,7 @@ function insertWords() {
     div.innerHTML = words.join(" ") // This will be the content of a line
 
     document.getElementById("generatedWords").appendChild(div)
+    // document.getElementById("youtubePlayer").appendChild(div)
   }
 }
 
@@ -683,6 +683,46 @@ function deleteAll() {
   while (rhymeLines.firstChild) {
     rhymeLines.removeChild(rhymeLines.firstChild)
   }
+}
+
+// let player
+
+// function onYouTubeIframeAPIReady(link) {
+//   player = new YT.Player('player', {
+//     height: '144',
+//     width: '256',
+//     videoId: link,
+//   })
+// }
+
+let youtubeRegex = /\&.*$/
+let embedRegex = /watch\?v=/
+
+function getYoutube() {
+  // initial link
+  let link = document.getElementById("youtubeLink").value
+  // removes everything after the video id
+  let newLink = link.replace(youtubeRegex, "")
+  // changes "/watch?v=" to "/embed/"
+  let finalLink = newLink.replace(embedRegex, "embed/")
+  // If a video already exists remove it before adding the new one
+  if (document.getElementById("randomid")) {
+    document.getElementById("randomid").remove()
+  }
+  // After inputting a link clear the input box
+  document.getElementById("youtubeLink").value = ""
+  // Create the iframe
+  let iframe = document.createElement("iframe")
+  iframe.width = "256"
+  iframe.height = "144"
+  iframe.id = "randomid"
+  iframe.allowFullscreen = 1
+  iframe.setAttribute("src", finalLink)
+  iframe.setAttribute(
+    "allow",
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  )
+  document.getElementById("player").appendChild(iframe)
 }
 
 function OverlordAndInsert() {
