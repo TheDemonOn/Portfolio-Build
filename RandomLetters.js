@@ -685,15 +685,15 @@ function deleteAll() {
   }
 }
 
-// let player
-
-// function onYouTubeIframeAPIReady(link) {
-//   player = new YT.Player('player', {
-//     height: '144',
-//     width: '256',
-//     videoId: link,
-//   })
-// }
+// Let's you hit enter for the putting in a youtube video
+window.onload = function () {
+  document.getElementById("youtubeLink").addEventListener("keyup", (event) => {
+    console.log(event.key)
+    event.key === "Enter"
+      ? document.getElementById("youtubeButton").click()
+      : undefined
+  })
+}
 
 let youtubeRegex = /\&.*$/
 let embedRegex = /watch\?v=/

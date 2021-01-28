@@ -37,6 +37,11 @@ ol {
   color: rgb(230, 230, 230);
 }
 
+footer {
+
+  bottom: 2em;
+}
+
 .margin {
   margin-left: 20%;
   margin-right: 20%;
@@ -107,11 +112,15 @@ ol {
   flex-direction: column;
 }
 
+#generationParameters {
+  position: fixed;
+}
+
 #player {
   position: fixed;
 
   /* bottom: 3em; */
-  bottom: 10em;
+  bottom: 15em;
   /* left: -10em */
 
 }
@@ -134,23 +143,27 @@ ol {
 }
 
 #generatedWordList {
+  padding-left: 25px;
   color: rgb(230, 230, 230);
   font-family: arial;
   font-size: 1em;
 }
 
 #positioning {
+  /* position: fixed; */
+  /* border: solid; */
   display: flex;
   flex-direction: row;
 }
 
 #wordList {
-  display: flex;
-  flex-direction: column;
-}
-
-#generatedWordList {
-  padding-left: 25px;
+  position: absolute;
+  left:0;
+  right:0;
+  /* border: solid; */
+  margin-left: auto;
+  margin-right: 10em;
+  width: 50%;
 }
 
 body {
