@@ -73,10 +73,64 @@ const convertToStringVersion = () => {
   }
 }
 function wordAssembleBasicWord() {
-  // let orientationEndIndex = sanitizedOrientation.length - 1
   let orientationEndIndex = orientationArray.length - 1
 
-  for (let i = 0; i < orientationArrayString.length; i++) {
+  // Maybe to generate different kinds of grapheme structures a random orientation of graphemes can be generated on the base words
+  // which are not used for rhyming and it could generate on each instance of the function
+  // Might want to limit the amount of graphemes to not exceed the rhyming orientation to keep the words at a more similar size
+
+  // This will select the random orientation from one of 14 different ones that produce words
+  let randomGrapheme = Math.floor(Math.random() * 14)
+  var randomOrientation
+
+  switch (randomGrapheme) {
+    case 1:
+      randomOrientation = ["Consonants", "Vowels"]
+      break
+    case 2:
+      randomOrientation = ["Consonants", "Vowels", "Consonants"]
+      break
+    case 3:
+      randomOrientation = ["Consonants", "Vowels", "Vowels"]
+      break
+    case 4:
+      randomOrientation = ["Consonants", "Vowels", "Vowels", "Consonants"]
+      break
+    case 5:
+      randomOrientation = ["Consonants", "Vowels", "Consonants", "Vowels"]
+      break
+    case 6:
+      randomOrientation = ["Vowels", "Vowels"]
+      break
+    case 7:
+      randomOrientation = ["Vowels", "Consonants"]
+      break
+    case 8:
+      randomOrientation = ["Vowels", "Consonants", "Vowels"]
+      break
+    case 9:
+      randomOrientation = ["Vowels", "Vowels", "Consonants"]
+      break
+    case 10:
+      randomOrientation = ["Vowels", "Vowels", "Vowels"]
+      break
+    case 11:
+      randomOrientation = ["Vowels", "Consonants", "Vowels", "Vowels"]
+      break
+    case 12:
+      randomOrientation = ["Vowels", "Consonants", "Vowels", "Consonants"]
+      break
+    case 13:
+      randomOrientation = ["Vowels", "Consonants", "Consonants", "Vowels"]
+      break
+    case 0:
+      randomOrientation = ["Vowels", "Vowels", "Consonants", "Vowels"]
+      break
+  }
+
+  console.log(randomOrientation)
+
+  for (let i = 0; i < randomOrientation.length; i++) {
     // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
 
     switch (i) {
@@ -85,19 +139,18 @@ function wordAssembleBasicWord() {
         // This will be the .beginning or .prefix
         if (Math.floor(Math.random() * 4) > 0) {
           assembledWordsArray.push(
-            letterUnits[orientationArrayString[i]].beginning[
+            letterUnits[randomOrientation[i]].beginning[
               Math.floor(
                 Math.random() *
-                  letterUnits[orientationArrayString[i]].beginning.length
+                  letterUnits[randomOrientation[i]].beginning.length
               )
             ]
           )
         } else {
           assembledWordsArray.push(
-            letterUnits[orientationArrayString[i]].prefix[
+            letterUnits[randomOrientation[i]].prefix[
               Math.floor(
-                Math.random() *
-                  letterUnits[orientationArrayString[i]].prefix.length
+                Math.random() * letterUnits[randomOrientation[i]].prefix.length
               )
             ]
           )
@@ -107,19 +160,17 @@ function wordAssembleBasicWord() {
         // This will be the .end or .suffix
         if (Math.floor(Math.random() * 4) > 0) {
           assembledWordsArray.push(
-            letterUnits[orientationArrayString[i]].end[
+            letterUnits[randomOrientation[i]].end[
               Math.floor(
-                Math.random() *
-                  letterUnits[orientationArrayString[i]].end.length
+                Math.random() * letterUnits[randomOrientation[i]].end.length
               )
             ]
           )
         } else {
           assembledWordsArray.push(
-            letterUnits[orientationArrayString[i]].suffix[
+            letterUnits[randomOrientation[i]].suffix[
               Math.floor(
-                Math.random() *
-                  letterUnits[orientationArrayString[i]].suffix.length
+                Math.random() * letterUnits[randomOrientation[i]].suffix.length
               )
             ]
           )
@@ -128,10 +179,9 @@ function wordAssembleBasicWord() {
       default:
         // This will be the .middle
         assembledWordsArray.push(
-          letterUnits[orientationArrayString[i]].middle[
+          letterUnits[randomOrientation[i]].middle[
             Math.floor(
-              Math.random() *
-                letterUnits[orientationArrayString[i]].middle.length
+              Math.random() * letterUnits[randomOrientation[i]].middle.length
             )
           ]
         )
@@ -334,7 +384,6 @@ function wordAssembleRhymes() {
 function wordAssembleRhyme2() {
   let orientationEndIndex = orientationArray.length - 1
   let orientationPreceding = orientationArray.length - 2
-  console.log("HOW ABOUT THIS")
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
       case 0:
@@ -670,11 +719,9 @@ function insertWords() {
       let divLine = document.getElementById(strId)
       divLine.remove()
     }
-    //div.addEventListener('click', deleteDiv) //This detects if div was clicked
     div.innerHTML = words.join(" ") // This will be the content of a line
 
     document.getElementById("generatedWords").appendChild(div)
-    // document.getElementById("youtubePlayer").appendChild(div)
   }
 }
 
@@ -688,7 +735,6 @@ function deleteAll() {
 // Let's you hit enter for the putting in a youtube video
 window.onload = function () {
   document.getElementById("youtubeLink").addEventListener("keyup", (event) => {
-    console.log(event.key)
     event.key === "Enter"
       ? document.getElementById("youtubeButton").click()
       : undefined
