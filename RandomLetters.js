@@ -42,11 +42,11 @@ function wordBuild() {
 }
 
 let wordCount = []
-let vowelPrecedingCheckerRegex = /[aeiouyr]/
+// let vowelPrecedingCheckerRegex = /[aeiouyr]/
 
 let orientationArray = []
 
-let orientationArrayString = []
+var orientationArrayString = []
 
 let sanitizedOrientation = gorientation // This will be that regex output
 
@@ -190,8 +190,59 @@ function wordAssembleBasicWord() {
   }
 }
 function wordAssembleRhyme() {
-  let orientationEndIndex = orientationArray.length - 1
-  let orientationPreceding = orientationArray.length - 2
+  let randomGrapheme = Math.floor(Math.random() * 9)
+
+  if (orientationArrayString.length === 0) {
+    switch (randomGrapheme) {
+      case 1:
+        orientationArrayString = ["Consonants", "Vowels"]
+        break
+      case 2:
+        orientationArrayString = ["Consonants", "Vowels", "Consonants"]
+        break
+      case 3:
+        orientationArrayString = [
+          "Consonants",
+          "Vowels",
+          "Consonants",
+          "Vowels",
+        ]
+        break
+      case 4:
+        orientationArrayString = ["Vowels", "Consonants", "Vowels"]
+        break
+      case 5:
+        orientationArrayString = ["Vowels", "Vowels", "Vowels"]
+        break
+      case 6:
+        orientationArrayString = ["Vowels", "Consonants", "Vowels", "Vowels"]
+        break
+      case 7:
+        orientationArrayString = [
+          "Vowels",
+          "Consonants",
+          "Vowels",
+          "Consonants",
+        ]
+        break
+      case 8:
+        orientationArrayString = [
+          "Vowels",
+          "Consonants",
+          "Consonants",
+          "Vowels",
+        ]
+        break
+      case 0:
+        orientationArrayString = ["Vowels", "Vowels", "Consonants", "Vowels"]
+        break
+    }
+  }
+
+  console.log(orientationArrayString)
+
+  let orientationEndIndex = orientationArrayString.length - 1
+  let orientationPreceding = orientationArrayString.length - 2
 
   for (let i = 0; i < orientationArrayString.length; i++) {
     // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
@@ -281,8 +332,8 @@ function wordAssembleRhyme() {
   }
 }
 function wordAssembleRhymes() {
-  let orientationEndIndex = orientationArray.length - 1
-  let orientationPreceding = orientationArray.length - 2
+  let orientationEndIndex = orientationArrayString.length - 1
+  let orientationPreceding = orientationArrayString.length - 2
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
       case 0:
@@ -382,8 +433,8 @@ function wordAssembleRhymes() {
   keyHolder.pop()
 }
 function wordAssembleRhyme2() {
-  let orientationEndIndex = orientationArray.length - 1
-  let orientationPreceding = orientationArray.length - 2
+  let orientationEndIndex = orientationArrayString.length - 1
+  let orientationPreceding = orientationArrayString.length - 2
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
       case 0:
@@ -470,11 +521,9 @@ function wordAssembleRhyme2() {
   }
 }
 function wordAssembleRhymes2() {
-  let orientationEndIndex = orientationArray.length - 1
-  let orientationPreceding = orientationArray.length - 2
+  let orientationEndIndex = orientationArrayString.length - 1
+  let orientationPreceding = orientationArrayString.length - 2
   console.log(precedingKey2[0])
-  console.log("HELLOW")
-
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
       case 0:
