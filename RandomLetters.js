@@ -745,6 +745,8 @@ function OVERLORD() {
   structureProducer()
 }
 
+let deletedDivs = []
+
 function insertWords() {
   // This creates divs, which are the individual lines, with random Id's that when clicked get deleted.
   let words = []
@@ -766,6 +768,7 @@ function insertWords() {
       var id = this.id
       strId = id.toString()
       let divLine = document.getElementById(strId)
+      deletedDivs.push(divLine)
       divLine.remove()
     }
     div.innerHTML = words.join(" ") // This will be the content of a line
@@ -776,9 +779,19 @@ function insertWords() {
 
 function deleteAll() {
   let rhymeLines = document.getElementById("generatedWords")
+  let allRhymesDeletedDiv = []
   while (rhymeLines.firstChild) {
+    allRhymesDeletedDiv.push(
+      document.getElementById(rhymeLines.firstChild.id).innerText
+    )
     rhymeLines.removeChild(rhymeLines.firstChild)
   }
+  console.log(allRhymesDeletedDiv)
+  deletedDivs.push(allRhymesDeletedDiv)
+}
+
+function undoDeleted() {
+  document.getElementById("generatedWords").appendChild(deletedDivs.shift())
 }
 
 // Let's you hit enter for the putting in a youtube video
