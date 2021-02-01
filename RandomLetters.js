@@ -35,7 +35,10 @@ function wordBuild() {
   for (let b = 0; b < assembledWordsArray.length; b++) {
     assembledWord = assembledWord + assembledWordsArray[b]
   }
-  console.log(assembledWordsArray)
+  // console.log(assembledWordsArray)
+  console.log(document.getElementById("generatedWords"))
+  console.log(document.getElementById("generatedWords").childNodes)
+  console.log(document.getElementById("generatedWords").childNodes[0])
   assembledSentence.push(assembledWord)
   assembledWordsArray.length = 0
   assembledWord = ""
@@ -768,7 +771,12 @@ function insertWords() {
       var id = this.id
       strId = id.toString()
       let divLine = document.getElementById(strId)
-      deletedDivs.push(divLine)
+      let divArray = Array.from(
+        document.getElementById("generatedWords").childNodes
+      )
+      let divIndex = divArray.filter((x) => x.id === strId)[0]
+      let arrayDivIndex = divArray.indexOf(divIndex)
+      deletedDivs.push([divLine, arrayDivIndex])
       divLine.remove()
     }
     div.innerHTML = words.join(" ") // This will be the content of a line
@@ -791,7 +799,14 @@ function deleteAll() {
 }
 
 function undoDeleted() {
-  document.getElementById("generatedWords").appendChild(deletedDivs.shift())
+  let deletedDiv = deletedDivs.pop()
+  console.log(deletedDiv)
+  document
+    .getElementById("generatedWords")
+    .insertBefore(
+      deletedDiv[0],
+      document.getElementById("generatedWords").childNodes[deletedDiv[1]]
+    )
 }
 
 // Let's you hit enter for the putting in a youtube video
