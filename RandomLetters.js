@@ -26,16 +26,11 @@ let wordInformation = {
   line: 0,
 }
 
-//let letterStr = 'm'
-//let testStr = 'mmm'
-//let letterRegex = new RegExp(letterStr + '{3,4}')
-//console.log(testStr.match(letterRegex)[0])
 function wordBuild() {
   // this simply combines the array of letters into one then resets everything for the next iteration
   for (let b = 0; b < assembledWordsArray.length; b++) {
     assembledWord = assembledWord + assembledWordsArray[b]
   }
-  // console.log(assembledWordsArray)
   console.log(document.getElementById("generatedWords"))
   console.log(document.getElementById("generatedWords").childNodes)
   console.log(document.getElementById("generatedWords").childNodes[0])
@@ -130,8 +125,6 @@ function wordAssembleBasicWord() {
       randomOrientation = ["Vowels", "Vowels", "Consonants", "Vowels"]
       break
   }
-
-  console.log(randomOrientation)
 
   for (let i = 0; i < randomOrientation.length; i++) {
     // [orientationArrayString[i]] is the current "Vowels" or "Consonants" which are used to access the correct object
@@ -241,8 +234,6 @@ function wordAssembleRhyme() {
         break
     }
   }
-
-  console.log(orientationArrayString)
 
   let orientationEndIndex = orientationArrayString.length - 1
   let orientationPreceding = orientationArrayString.length - 2
@@ -492,9 +483,7 @@ function wordAssembleRhyme2() {
           let precedingValue = Math.floor(
             Math.random() * letterUnits[orientationArrayString[i]].middle.length
           )
-          console.log(precedingKey2)
           precedingKey2.push(precedingValue)
-          console.log(precedingKey2)
           assembledWordsArray.push(
             letterUnits[orientationArrayString[i]].middle[precedingValue]
           )
@@ -526,7 +515,6 @@ function wordAssembleRhyme2() {
 function wordAssembleRhymes2() {
   let orientationEndIndex = orientationArrayString.length - 1
   let orientationPreceding = orientationArrayString.length - 2
-  console.log(precedingKey2[0])
   for (let i = 0; i < orientationArrayString.length; i++) {
     switch (i) {
       case 0:
@@ -768,8 +756,8 @@ function insertWords() {
     div.style.lineHeight = "30px"
     div.onclick = function () {
       // This ties a function of onclick to each div created which reads the element's id and deletes it
-      var id = this.id
-      strId = id.toString()
+      let id = this.id
+      let strId = id.toString()
       let divLine = document.getElementById(strId)
       let divArray = Array.from(
         document.getElementById("generatedWords").childNodes
@@ -789,24 +777,49 @@ function deleteAll() {
   let rhymeLines = document.getElementById("generatedWords")
   let allRhymesDeletedDiv = []
   while (rhymeLines.firstChild) {
-    allRhymesDeletedDiv.push(
-      document.getElementById(rhymeLines.firstChild.id).innerText
-    )
+    allRhymesDeletedDiv.push([
+      document.getElementById(rhymeLines.firstChild.id),
+      0,
+      1,
+    ])
     rhymeLines.removeChild(rhymeLines.firstChild)
   }
   console.log(allRhymesDeletedDiv)
-  deletedDivs.push(allRhymesDeletedDiv)
+  deletedDivs.push(...allRhymesDeletedDiv)
 }
 
 function undoDeleted() {
+  // deletedDiv is the single div undo is performing on;
+  // it is an array with index 0 = the actual div and index 1 = the index of its original position and possibly index 2 = signal that deleteAll was used
+  let undoDeleteAll = []
   let deletedDiv = deletedDivs.pop()
-  console.log(deletedDiv)
-  document
-    .getElementById("generatedWords")
-    .insertBefore(
-      deletedDiv[0],
-      document.getElementById("generatedWords").childNodes[deletedDiv[1]]
-    )
+  if (deletedDiv[2]) {
+    undoDeleteAll.push(deletedDivs.filter((x) => x[2] === 1).length)
+    document
+      .getElementById("generatedWords")
+      .insertBefore(
+        deletedDiv[0],
+        document.getElementById("generatedWords").childNodes[deletedDiv[1]]
+      )
+    for (let i = 0; i < undoDeleteAll[0]; i++) {
+      let loopDeletedDiv = deletedDivs.pop()
+      document
+        .getElementById("generatedWords")
+        .insertBefore(
+          loopDeletedDiv[0],
+          document.getElementById("generatedWords").childNodes[
+            loopDeletedDiv[1]
+          ]
+        )
+    }
+  } else {
+    document
+      .getElementById("generatedWords")
+      .insertBefore(
+        deletedDiv[0],
+        document.getElementById("generatedWords").childNodes[deletedDiv[1]]
+      )
+  }
 }
 
 // Let's you hit enter for the putting in a youtube video
