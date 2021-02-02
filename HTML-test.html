@@ -41,10 +41,8 @@
       </header>
       <h2 class="margin">
         GOOD NEW IDEAS: Create two modes, one that lets you toggle between deleting divs on click, then another that lets you modify
-        specific words dynamically. Create some kind of undo button for deleting; like save all divs that are manually deleted but not when the
-        deleteAll button is used. Create a version of the text inputs that doesn't have the vcvc orientation unless you want to toggle
+        specific words dynamically. Create a version of the text inputs that doesn't have the vcvc orientation unless you want to toggle
         the advanced settings to show it.
-        
       </h2>
       <div id="youtube">
     
@@ -83,6 +81,15 @@
         <br /> 
         <button type="button" onclick="OverlordAndInsert()">Generate random words</button>
         <br> <br>
+        <div>
+          <input type="radio" id="modify" name="drone" value="modify" onclick="modifyRadio()" checked>
+          <label for="modify">Modify</label>
+        </div>
+        <div>
+          <input type="radio" id="remove" name="drone" value="remove" onclick="deleteRadio()">
+          <label for="remove">Remove</label>
+        </div>
+        <br>
         <button type="button" onclick="deleteAll()">Delete All</button>
         <button type="button" onclick="undoDeleted()">Undo Delete</button>
       </form>

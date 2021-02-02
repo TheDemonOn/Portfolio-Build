@@ -40,7 +40,6 @@ function wordBuild() {
 }
 
 let wordCount = []
-// let vowelPrecedingCheckerRegex = /[aeiouyr]/
 
 let orientationArray = []
 
@@ -612,7 +611,6 @@ function wordAssembleRhymes2() {
   keyHolder2.pop()
   keyHolder2.pop()
 }
-// Make the rhyme versions of the master function above and replace all the garbage individual functions
 
 function OVERLORD() {
   assembledSentence.length = 0 // This clears the queue of words so that it doesn't repeat
@@ -727,8 +725,6 @@ function OVERLORD() {
     }
   }
 
-  //rhymeStructure1212() // For testing 1212
-
   function structureProducer() {
     // This executes the actual generation
     structureOrientation()
@@ -737,6 +733,22 @@ function OVERLORD() {
 }
 
 let deletedDivs = []
+
+// 0 is modify 1 is delete
+var removeOrModify = 0
+
+function deleteRadio() {
+  removeOrModify = 1
+}
+function modifyRadio() {
+  removeOrModify = 0
+}
+
+// window.onload = () => {
+//   document.getElementById("modify").addEventListener()
+// }
+
+let originalDivs = []
 
 function insertWords() {
   // This creates divs, which are the individual lines, with random Id's that when clicked get deleted.
@@ -749,23 +761,53 @@ function insertWords() {
     }
     let div = document.createElement("div")
     div.id = Math.random()
-    div.xml
     div.style.fontFamily = "arial"
     div.style.color = "#ffffff"
     div.style.fontSize = "large"
     div.style.lineHeight = "30px"
+    div.style.cursor = "pointer"
     div.onclick = function () {
       // This ties a function of onclick to each div created which reads the element's id and deletes it
-      let id = this.id
-      let strId = id.toString()
-      let divLine = document.getElementById(strId)
-      let divArray = Array.from(
-        document.getElementById("generatedWords").childNodes
-      )
-      let divIndex = divArray.filter((x) => x.id === strId)[0]
-      let arrayDivIndex = divArray.indexOf(divIndex)
-      deletedDivs.push([divLine, arrayDivIndex])
-      divLine.remove()
+      if (removeOrModify) {
+        let id = this.id
+        let strId = id.toString()
+        let divLine = document.getElementById(strId)
+        let divArray = Array.from(
+          document.getElementById("generatedWords").childNodes
+        )
+        let divIndex = divArray.filter((x) => x.id === strId)[0]
+        let arrayDivIndex = divArray.indexOf(divIndex)
+        deletedDivs.push([divLine, arrayDivIndex])
+        divLine.remove()
+      } else {
+        // Turn it into a text input that when you hit enter goes back to normal the but the inner.text is modified
+
+        // create the text input
+        let dynamicInput = document.createElement("INPUT")
+        dynamicInput.setAttribute("type", "text")
+        dynamicInput.id = "dynamicInput"
+
+        let id = this.id
+        let strId = id.toString()
+        let divLine = document.getElementById(strId)
+        originalDivs.push(divLine)
+        // set the input value to what the text is
+        dynamicInput.setAttribute("value", divLine.innerText)
+        // replaces the original div with the new text input with the value filled in
+        let parentDiv = divLine.parentNode
+        parentDiv.replaceChild(dynamicInput, divLine)
+        let originalDiv = originalDivs.pop()
+        originalDiv.innerText = dynamicInput.value
+        // adds the ability to hit enter
+        document
+          .getElementById("dynamicInput")
+          .addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+              originalDiv.innerText = dynamicInput.value
+              parentDiv.replaceChild(originalDiv, dynamicInput)
+            }
+          })
+      }
     }
     div.innerHTML = words.join(" ") // This will be the content of a line
 
