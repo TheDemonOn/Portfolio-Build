@@ -750,6 +750,10 @@ function modifyRadio() {
 
 let originalDivs = []
 
+let dynamicTextElement = []
+
+var dynamicTextBoxLimit = 0
+
 function insertWords() {
   // This creates divs, which are the individual lines, with random Id's that when clicked get deleted.
   let words = []
@@ -782,6 +786,16 @@ function insertWords() {
       } else {
         // Turn it into a text input that when you hit enter goes back to normal the but the inner.text is modified
 
+        if (dynamicTextBoxLimit) {
+          // if a dynamic text input already exists replace it with it's original div then continue as normal
+          let olderTextInput = document.getElementById("dynamicInput")
+          let olderDiv = originalDivs.pop()
+          olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
+          dynamicTextBoxLimit--
+        }
+        // This is for telling if a dynamic text input exists currently
+        dynamicTextBoxLimit++
+
         // create the text input
         let dynamicInput = document.createElement("INPUT")
         dynamicInput.setAttribute("type", "text")
@@ -796,15 +810,16 @@ function insertWords() {
         // replaces the original div with the new text input with the value filled in
         let parentDiv = divLine.parentNode
         parentDiv.replaceChild(dynamicInput, divLine)
-        let originalDiv = originalDivs.pop()
-        originalDiv.innerText = dynamicInput.value
         // adds the ability to hit enter
         document
           .getElementById("dynamicInput")
           .addEventListener("keyup", (event) => {
             if (event.key === "Enter") {
+              let originalDiv = originalDivs.pop()
               originalDiv.innerText = dynamicInput.value
               parentDiv.replaceChild(originalDiv, dynamicInput)
+              // This removes the flag for a text input existing
+              dynamicTextBoxLimit--
             }
           })
       }

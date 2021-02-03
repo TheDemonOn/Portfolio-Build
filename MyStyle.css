@@ -42,6 +42,12 @@ footer {
   bottom: 2em;
 }
 
+label {
+  color: rgb(230, 230, 230);
+  font-family: arial;
+  font-size: 1em;
+}
+
 .margin {
   margin-left: 20%;
   margin-right: 20%;
