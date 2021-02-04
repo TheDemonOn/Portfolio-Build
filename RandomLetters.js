@@ -739,6 +739,13 @@ var removeOrModify = 0
 
 function deleteRadio() {
   removeOrModify = 1
+  if (dynamicTextBoxLimit) {
+    // if a dynamic text input already exists replace it with it's original div then continue as normal
+    let olderTextInput = document.getElementById("dynamicInput")
+    let olderDiv = originalDivs.pop()
+    olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
+    dynamicTextBoxLimit--
+  }
 }
 function modifyRadio() {
   removeOrModify = 0
@@ -749,8 +756,6 @@ function modifyRadio() {
 // }
 
 let originalDivs = []
-
-let dynamicTextElement = []
 
 var dynamicTextBoxLimit = 0
 

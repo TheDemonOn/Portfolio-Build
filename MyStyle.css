@@ -56,6 +56,7 @@ label {
 .navbar {
   background-color: rgb(2, 70, 87);
   overflow: hidden;
+  width: 100%;
   height: 63px;
 }
 
@@ -182,7 +183,66 @@ footer {
   text-align: center;
 }
 
-@media (max-width: 568px) {
+/* .margin {
+  margin-left: 20%;
+  margin-right: 20%;
+} */
+
+@media (max-width: 1370px) {
+
+  #player {
+    position: relative;
+    margin-top: 3em;
+    text-align: left;
+    /* bottom: 3em; */
+    /* bottom: 15em; */
+    /* left: -10em */
+  
+  }
+
+  #generatedWordList {
+    padding-left: 0px;
+    color: rgb(230, 230, 230);
+    font-family: arial;
+    font-size: 1em;
+    text-align: center;
+  }
+
+  #generatedWords {
+    padding-left: 0;
+    padding-bottom: 15em;
+    word-break: break-word;
+    /* border: solid;  */
+  }
+
+  #wordList {
+    position: relative;
+    left:0em;
+    right:0;
+    text-align: left;
+    /* border: solid; */
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  body {
+    /* overflow-x: auto;
+    white-space: nowrap; */
+    
+  }
+
+  .margin {
+    margin-left: 20%;
+    margin-right: 20%;
+    white-space:normal
+
+  }
+
+  #generationParameters {
+    position:relative
+  }
+
   .navbar-nav {
     display: none;
   }
@@ -195,10 +255,14 @@ footer {
   form {
     display: inline-block;
   }
+
 }
 
-@media (max-width: 100px) {
-  body {
-    overflow-x: auto;
+@media (max-width: 600px) {
+  .navbar {
+    background-color: rgb(2, 70, 87);
+    overflow: hidden;
+    width: 105%;
+    height: 63px;
   }
 }
