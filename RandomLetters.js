@@ -742,18 +742,16 @@ function deleteRadio() {
   if (dynamicTextBoxLimit) {
     // if a dynamic text input already exists replace it with it's original div then continue as normal
     let olderTextInput = document.getElementById("dynamicInput")
-    let olderDiv = originalDivs.pop()
-    olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
-    dynamicTextBoxLimit--
+    if (olderTextInput.parentNode) {
+      let olderDiv = originalDivs.pop()
+      olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
+      dynamicTextBoxLimit--
+    }
   }
 }
 function modifyRadio() {
   removeOrModify = 0
 }
-
-// window.onload = () => {
-//   document.getElementById("modify").addEventListener()
-// }
 
 let originalDivs = []
 
@@ -881,6 +879,15 @@ function undoDeleted() {
         deletedDiv[0],
         document.getElementById("generatedWords").childNodes[deletedDiv[1]]
       )
+  }
+  // This ensures that if undoDelete is used on a deleteAll then if a dynamic text input exists it will get replaced with its original
+  if (dynamicTextBoxLimit) {
+    let olderTextInput = document.getElementById("dynamicInput")
+    if (olderTextInput.parentNode) {
+      let olderDiv = originalDivs.pop()
+      olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
+      dynamicTextBoxLimit--
+    }
   }
 }
 
