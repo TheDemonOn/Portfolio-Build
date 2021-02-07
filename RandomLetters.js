@@ -40,7 +40,7 @@ function wordBuild() {
 }
 
 let wordCount = []
-
+// gorientation separated into here
 let orientationArray = []
 
 var orientationArrayString = []
@@ -64,7 +64,7 @@ const convertToStringVersion = () => {
   for (let e = 0; e < orientationArray.length; e++) {
     if (orientationArray[e] === "v" || orientationArray[e] === "V") {
       orientationArrayString.push("Vowels")
-    } else {
+    } else if (orientationArray[e] === "c" || orientationArray[e] === "C") {
       orientationArrayString.push("Consonants")
     }
   }
@@ -188,6 +188,7 @@ function wordAssembleRhyme() {
   let randomGrapheme = Math.floor(Math.random() * 9)
 
   if (orientationArrayString.length === 0) {
+    console.log("A random grapheme orientation was selected")
     switch (randomGrapheme) {
       case 1:
         orientationArrayString = ["Consonants", "Vowels"]
@@ -787,8 +788,7 @@ function insertWords() {
         deletedDivs.push([divLine, arrayDivIndex])
         divLine.remove()
       } else {
-        // Turn it into a text input that when you hit enter goes back to normal the but the inner.text is modified
-
+        // This creates a text input from which the text of any div can be modified
         if (dynamicTextBoxLimit) {
           // if a dynamic text input already exists replace it with it's original div then continue as normal
           let olderTextInput = document.getElementById("dynamicInput")
@@ -798,7 +798,6 @@ function insertWords() {
         }
         // This is for telling if a dynamic text input exists currently
         dynamicTextBoxLimit++
-
         // create the text input
         let dynamicInput = document.createElement("INPUT")
         dynamicInput.setAttribute("type", "text")

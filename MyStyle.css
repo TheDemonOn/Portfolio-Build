@@ -1,5 +1,6 @@
 body {
   overflow-x: hidden;
+  background-color: rgba(10, 56, 73, 0.747);
 }
 
 iframe {
@@ -172,10 +173,6 @@ label {
   margin-left: auto;
   margin-right: 10em;
   width: 50%;
-}
-
-body {
-  background-color: rgba(10, 56, 73, 0.747);
 }
 
 footer {
