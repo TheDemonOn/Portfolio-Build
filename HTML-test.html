@@ -1,119 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="MyStyle.css" />
-    <script src="LetterPositioning.js"></script>
-    <script src="RandomLetters.js"></script>
-    <!-- <script src="Functions.js"></script> -->
-    <title>Antonio's Website</title>
-  </head>
-  <body>
-    <nav class="navbar">
-      <span class="open-slide">
-        <a href="#" onclick="openSlideMenu()">
-          <svg width="30" height="30">
-            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
-            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
-            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
-          </svg>
-        </a>
-      </span>
-      <ul class="navbar-nav">
-        <li> <a href="#">some</a></li>
-        <li> <a href="#">body</a></li>
-        <li> <a href="#">once</a></li>
-        <li> <a href="#">told</a></li>
-      </ul>
-    </nav>
-    <div id="side-menu" class="side-nav">
-      <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-      <a href="#">some</a>
-      <a href="#">body</a>
-      <a href="#">once</a>
-      <a href="#">told</a>
-    </div>
-    <div id="main">
-      <header>
-      <h1>Hello Stranger</h1>
-      </header>
-      <h2 class="margin">
-        GOOD NEW IDEAS: Create a version of the text inputs that doesn't have the vcvc orientation unless you want to toggle
-        the advanced settings to show it.
-      </h2>
-      <div id="youtube">
-    
-      <div class="margin" id="positioning">
-      <form name="woo"  >
-        <div id="generationParameters">
-        <input
-          type="text"
-          placeholder="How many words per line?"
-          id="WPL"
-          value="2"
-          required
-        />
-        <br /><br />
-        <input
-          type="text"
-          placeholder="How many lines?"
-          id="lineNumber"
-          value="4"
-          required
-        />
-        <br /><br />
-        <input
-          type="text"
-          id="graphemeStructure"
-          placeholder="VC orientation"
-          value="vcvc"
-        />
-        <br /><br />
-        <input
-          type="text"
-          id="vcvcStructure"
-          placeholder="VC structure"
-          value="1122"
-        /><br />
-        <br /> 
-        <button type="button" onclick="OverlordAndInsert()">Generate random words</button>
-        <br> <br>
-        <div>
-          <input type="radio" id="modify" name="drone" value="modify" onclick="modifyRadio()" checked>
-          <label for="modify">Modify</label>
-        </div>
-        <div>
-          <input type="radio" id="remove" name="drone" value="remove" onclick="deleteRadio()">
-          <label for="remove">Remove</label>
-        </div>
-        <br>
-        <button type="button" onclick="deleteAll()">Delete All</button>
-        <button type="button" onclick="undoDeleted()">Undo Delete</button>
-      </form>
-      <br />
-        <br /> 
-        <input
-        type="text"
-        id="youtubeLink"
-        placeholder="Youtube Link"
-      />
-      <button id="youtubeButton" type="button" onclick="getYoutube()">Play Video</button>
-    </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="MyStyle.css" />
+  <script src="LetterPositioning.js"></script>
+  <script src="RandomLetters.js"></script>
+  <title>Antonio's Website</title>
+</head>
+
+<body>
+  <nav class="navbar">
+    <span class="open-slide">
+      <a href="#" onclick="openSlideMenu()">
+        <svg width="30" height="30">
+          <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+          <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+          <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+        </svg>
+      </a>
+    </span>
+    <ul class="navbar-nav">
+      <li> <a href="#">some</a></li>
+      <li> <a href="#">body</a></li>
+      <li> <a href="#">once</a></li>
+      <li> <a href="#">told</a></li>
+    </ul>
+  </nav>
+  <div id="side-menu" class="side-nav">
+    <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+    <a href="#">some</a>
+    <a href="#">body</a>
+    <a href="#">once</a>
+    <a href="#">told</a>
   </div>
+  <div id="main">
+    <header>
+      <h1>Hello Stranger</h1>
+    </header>
+    <h2 class="margin">
+      GOOD NEW IDEAS: Create a version of the text inputs that doesn't have the vcvc orientation unless you want to
+      toggle
+      the advanced settings to show it.
+    </h2>
+    <div id="youtube">
+      <div class="margin" id="positioning">
+        <form name="woo">
+          <div id="generationParameters">
+            <p>How many words per line?</p>
+            <input class="br" type="text" placeholder="How many words per line?" id="WPL" value="2" required />
+            <p>How many lines?</p>
+            <input class="br" type="text" maxlength="4" placeholder="How many lines?" id="lineNumber" value="4"
+              required />
+            <p class="graphemeStructure">VC orientation</p>
+            <input class="br graphemeStructure" id="graphemeStructure" type="text" placeholder="VC orientation" />
+            <p>Rhyme structure</p>
+            <input class="br" type="text" id="vcvcStructure" placeholder="Rhyme structure" value="1122" />
+            <button class="br" type="button" onclick="OverlordAndInsert()">Generate random words</button>
+            <div>
+              <input type="radio" id="modify" name="drone" value="modify" onclick="modifyRadio()" checked>
+              <label for="modify">Modify</label>
+            </div>
+            <div>
+              <input type="radio" id="remove" name="drone" value="remove" onclick="deleteRadio()">
+              <label for="remove">Remove</label>
+            </div>
+            <div class="br">
+              <button type="button" onclick="deleteAll()">Delete All</button>
+              <button type="button" onclick="undoDeleted()">Undo Delete</button>
+            </div>
+            <button class="br" type="button" onclick="advancedSettingsSwap()">Advanced Settings</button>
+        </form>
+        <input type="text" id="youtubeLink" placeholder="Youtube Link" />
+        <button id="youtubeButton" type="button" onclick="getYoutube()">Play Video</button>
+      </div>
+    </div>
     <div id="wordList">
-    <h3 id="generatedWordList">Generated Words here</h3>
-    <div id="generatedWords"></div>
-    
+      <h3 id="generatedWordList">Generated Words here</h3>
+      <div id="generatedWords"></div>
+
     </div>
   </div>
   <div id="player">
   </div>
-    <br /><br /><br />
-    <!-- <footer><small>Copyright &copy; 2019, Antonio's Website</small></footer> -->
+  <!-- <footer><small>Copyright &copy; 2019, Antonio's Website</small></footer> -->
   </div>
-  
 
-  </body>
+
+</body>
+
 </html>
