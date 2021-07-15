@@ -1,10 +1,10 @@
 function openSlideMenu() {
-	document.getElementById("side-menu").style.width = "200px"
-	document.getElementById("main").style.marginLeft = "200px"
+	document.getElementById('side-menu').style.width = '200px'
+	document.getElementById('main').style.marginLeft = '200px'
 }
 function closeSlideMenu() {
-	document.getElementById("side-menu").style.width = "0px"
-	document.getElementById("main").style.marginLeft = "0px"
+	document.getElementById('side-menu').style.width = '0px'
+	document.getElementById('main').style.marginLeft = '0px'
 }
 
 let assembledWordsArray = []
@@ -12,15 +12,15 @@ let assembledWord = []
 let assembledSentence = []
 let keyHolder = []
 let keyHolder2 = []
-var gorientation = ""
-var structure = ""
+var gorientation = ''
+var structure = ''
 var precedingKey = []
 var precedingKey2 = []
-var baseRhyme = ""
-var rhyme1 = ""
-var rhyme2 = ""
-var rhymes1 = ""
-var rhymes2 = ""
+var baseRhyme = ''
+var rhyme1 = ''
+var rhyme2 = ''
+var rhymes1 = ''
+var rhymes2 = ''
 let wordInformation = {
 	count: 0,
 	line: 0,
@@ -31,12 +31,12 @@ function wordBuild() {
 	for (let b = 0; b < assembledWordsArray.length; b++) {
 		assembledWord = assembledWord + assembledWordsArray[b]
 	}
-	console.log(document.getElementById("generatedWords"))
-	console.log(document.getElementById("generatedWords").childNodes)
-	console.log(document.getElementById("generatedWords").childNodes[0])
+	console.log(document.getElementById('generatedWords'))
+	console.log(document.getElementById('generatedWords').childNodes)
+	console.log(document.getElementById('generatedWords').childNodes[0])
 	assembledSentence.push(assembledWord)
 	assembledWordsArray.length = 0
-	assembledWord = ""
+	assembledWord = ''
 }
 
 let wordCount = []
@@ -63,10 +63,10 @@ function orientationArrayBuilder(letterOrientation) {
 const convertToStringVersion = () => {
 	orientationArrayString.length = 0
 	for (let e = 0; e < orientationArray.length; e++) {
-		if (orientationArray[e] === "v" || orientationArray[e] === "V") {
-			orientationArrayString.push("Vowels")
-		} else if (orientationArray[e] === "c" || orientationArray[e] === "C") {
-			orientationArrayString.push("Consonants")
+		if (orientationArray[e] === 'v' || orientationArray[e] === 'V') {
+			orientationArrayString.push('Vowels')
+		} else if (orientationArray[e] === 'c' || orientationArray[e] === 'C') {
+			orientationArrayString.push('Consonants')
 		}
 	}
 }
@@ -83,46 +83,46 @@ function wordAssembleBasicWord() {
 
 	switch (randomGrapheme) {
 		case 1:
-			randomOrientation = ["Consonants", "Vowels"]
+			randomOrientation = ['Consonants', 'Vowels']
 			break
 		case 2:
-			randomOrientation = ["Consonants", "Vowels", "Consonants"]
+			randomOrientation = ['Consonants', 'Vowels', 'Consonants']
 			break
 		case 3:
-			randomOrientation = ["Consonants", "Vowels", "Vowels"]
+			randomOrientation = ['Consonants', 'Vowels', 'Vowels']
 			break
 		case 4:
-			randomOrientation = ["Consonants", "Vowels", "Vowels", "Consonants"]
+			randomOrientation = ['Consonants', 'Vowels', 'Vowels', 'Consonants']
 			break
 		case 5:
-			randomOrientation = ["Consonants", "Vowels", "Consonants", "Vowels"]
+			randomOrientation = ['Consonants', 'Vowels', 'Consonants', 'Vowels']
 			break
 		case 6:
-			randomOrientation = ["Vowels", "Vowels"]
+			randomOrientation = ['Vowels', 'Vowels']
 			break
 		case 7:
-			randomOrientation = ["Vowels", "Consonants"]
+			randomOrientation = ['Vowels', 'Consonants']
 			break
 		case 8:
-			randomOrientation = ["Vowels", "Consonants", "Vowels"]
+			randomOrientation = ['Vowels', 'Consonants', 'Vowels']
 			break
 		case 9:
-			randomOrientation = ["Vowels", "Vowels", "Consonants"]
+			randomOrientation = ['Vowels', 'Vowels', 'Consonants']
 			break
 		case 10:
-			randomOrientation = ["Vowels", "Vowels", "Vowels"]
+			randomOrientation = ['Vowels', 'Vowels', 'Vowels']
 			break
 		case 11:
-			randomOrientation = ["Vowels", "Consonants", "Vowels", "Vowels"]
+			randomOrientation = ['Vowels', 'Consonants', 'Vowels', 'Vowels']
 			break
 		case 12:
-			randomOrientation = ["Vowels", "Consonants", "Vowels", "Consonants"]
+			randomOrientation = ['Vowels', 'Consonants', 'Vowels', 'Consonants']
 			break
 		case 13:
-			randomOrientation = ["Vowels", "Consonants", "Consonants", "Vowels"]
+			randomOrientation = ['Vowels', 'Consonants', 'Consonants', 'Vowels']
 			break
 		case 0:
-			randomOrientation = ["Vowels", "Vowels", "Consonants", "Vowels"]
+			randomOrientation = ['Vowels', 'Vowels', 'Consonants', 'Vowels']
 			break
 	}
 
@@ -179,34 +179,34 @@ function wordAssembleRhyme() {
 
 	// If there is nothing in the orientation box, OR just 1 use this.
 	if (orientationArrayString.length === 0 || orientationArrayString.length === 1) {
-		console.log("A random grapheme orientation was selected")
+		console.log('A random grapheme orientation was selected')
 		switch (randomGrapheme) {
 			case 1:
-				orientationArrayString = ["Consonants", "Vowels"]
+				orientationArrayString = ['Consonants', 'Vowels']
 				break
 			case 2:
-				orientationArrayString = ["Consonants", "Vowels", "Consonants"]
+				orientationArrayString = ['Consonants', 'Vowels', 'Consonants']
 				break
 			case 3:
-				orientationArrayString = ["Consonants", "Vowels", "Consonants", "Vowels"]
+				orientationArrayString = ['Consonants', 'Vowels', 'Consonants', 'Vowels']
 				break
 			case 4:
-				orientationArrayString = ["Vowels", "Consonants", "Vowels"]
+				orientationArrayString = ['Vowels', 'Consonants', 'Vowels']
 				break
 			case 5:
-				orientationArrayString = ["Vowels", "Vowels", "Vowels"]
+				orientationArrayString = ['Vowels', 'Vowels', 'Vowels']
 				break
 			case 6:
-				orientationArrayString = ["Vowels", "Consonants", "Vowels", "Vowels"]
+				orientationArrayString = ['Vowels', 'Consonants', 'Vowels', 'Vowels']
 				break
 			case 7:
-				orientationArrayString = ["Vowels", "Consonants", "Vowels", "Consonants"]
+				orientationArrayString = ['Vowels', 'Consonants', 'Vowels', 'Consonants']
 				break
 			case 8:
-				orientationArrayString = ["Vowels", "Consonants", "Consonants", "Vowels"]
+				orientationArrayString = ['Vowels', 'Consonants', 'Consonants', 'Vowels']
 				break
 			case 0:
-				orientationArrayString = ["Vowels", "Vowels", "Consonants", "Vowels"]
+				orientationArrayString = ['Vowels', 'Vowels', 'Consonants', 'Vowels']
 				break
 		}
 	}
@@ -233,7 +233,7 @@ function wordAssembleRhyme() {
 						Math.random() * letterUnits[orientationArrayString[i]].suffix.length
 					)
 
-					keyHolder.push("") // for making keyHolder[1] a suffix
+					keyHolder.push('') // for making keyHolder[1] a suffix
 					keyHolder.push(rhymeKey)
 					assembledWordsArray.push(letterUnits[orientationArrayString[i]].suffix[rhymeKey])
 				}
@@ -257,8 +257,8 @@ function wordAssembleRhyme() {
 			case orientationPreceding:
 				// This will create a key if the last grapheme is a Consonant type and the one before is a Vowel type
 				if (
-					orientationArrayString[i] === "Vowels" &&
-					orientationArrayString[i + 1] === "Consonants"
+					orientationArrayString[i] === 'Vowels' &&
+					orientationArrayString[i + 1] === 'Consonants'
 				) {
 					let precedingValue = Math.floor(
 						Math.random() * letterUnits[orientationArrayString[i]].middle.length
@@ -329,8 +329,8 @@ function wordAssembleRhymes() {
 				break
 			case orientationPreceding:
 				if (
-					orientationArrayString[i] === "Vowels" &&
-					orientationArrayString[i + 1] === "Consonants"
+					orientationArrayString[i] === 'Vowels' &&
+					orientationArrayString[i + 1] === 'Consonants'
 				) {
 					assembledWordsArray.push(
 						letterUnits[orientationArrayString[i]].middleRhymeGroup[precedingKey[0]][
@@ -396,7 +396,7 @@ function wordAssembleRhyme2() {
 					let rhymeKey = Math.floor(
 						Math.random() * letterUnits[orientationArrayString[i]].suffix.length
 					)
-					keyHolder2.push("") // for making keyHolder2[1] a suffix
+					keyHolder2.push('') // for making keyHolder2[1] a suffix
 					keyHolder2.push(rhymeKey)
 					assembledWordsArray.push(letterUnits[orientationArrayString[i]].suffix[rhymeKey])
 				}
@@ -404,8 +404,8 @@ function wordAssembleRhyme2() {
 			case orientationPreceding:
 				// This will create a key if the last grapheme is a Consonant type and the one before is a Vowel type
 				if (
-					orientationArrayString[i] === "Vowels" &&
-					orientationArrayString[i + 1] === "Consonants"
+					orientationArrayString[i] === 'Vowels' &&
+					orientationArrayString[i + 1] === 'Consonants'
 				) {
 					let precedingValue = Math.floor(
 						Math.random() * letterUnits[orientationArrayString[i]].middle.length
@@ -477,8 +477,8 @@ function wordAssembleRhymes2() {
 
 			case orientationPreceding:
 				if (
-					orientationArrayString[i] === "Vowels" &&
-					orientationArrayString[i + 1] === "Consonants"
+					orientationArrayString[i] === 'Vowels' &&
+					orientationArrayString[i + 1] === 'Consonants'
 				) {
 					assembledWordsArray.push(
 						letterUnits[orientationArrayString[i]].middleRhymeGroup[precedingKey2[0]][
@@ -517,22 +517,22 @@ function OVERLORD() {
 	// previous iterations.
 
 	function letterCount() {
-		wordInformation.count = document.getElementById("WPL").value
+		wordInformation.count = document.getElementById('WPL').value
 	}
 	letterCount()
 
 	function lineCount() {
-		wordInformation.line = document.getElementById("lineNumber").value
+		wordInformation.line = document.getElementById('lineNumber').value
 	}
 	lineCount()
 	function orientation() {
 		// this is vcvc
-		gorientation = document.getElementById("graphemeStructure").value
+		gorientation = document.getElementById('graphemeStructure').value
 	}
 	orientation()
 	function structureGet() {
 		// this is 1122 or 1212
-		structure = document.getElementById("vcvcStructure").value
+		structure = document.getElementById('vcvcStructure').value
 	}
 	structureGet()
 
@@ -640,7 +640,7 @@ function deleteRadio() {
 	removeOrModify = 1
 	if (dynamicTextBoxLimit) {
 		// if a dynamic text input already exists replace it with it's original div then continue as normal
-		let olderTextInput = document.getElementById("dynamicInput")
+		let olderTextInput = document.getElementById('dynamicInput')
 		if (olderTextInput.parentNode) {
 			let olderDiv = originalDivs.pop()
 			olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
@@ -665,20 +665,22 @@ function insertWords() {
 			// This takes the individual words of the sentence array
 			words.push(assembledSentence.shift())
 		}
-		let div = document.createElement("div")
+		let div = document.createElement('div')
 		div.id = Math.random()
-		div.style.fontFamily = "arial"
-		div.style.color = "#ffffff"
-		div.style.fontSize = "large"
-		div.style.lineHeight = "30px"
-		div.style.cursor = "pointer"
+		div.style.fontFamily = 'soleil, sans-serif'
+		div.style.color = '#2f526b'
+		div.style.fontWeight = '1'
+		div.style.fontStyle = 'normal'
+		div.style.fontSize = '18px'
+		div.style.lineHeight = '1.6'
+		div.style.cursor = 'pointer'
 		div.onclick = function () {
 			// This ties a function of onclick to each div created which reads the element's id and deletes it
 			if (removeOrModify) {
 				let id = this.id
 				let strId = id.toString()
 				let divLine = document.getElementById(strId)
-				let divArray = Array.from(document.getElementById("generatedWords").childNodes)
+				let divArray = Array.from(document.getElementById('generatedWords').childNodes)
 				let divIndex = divArray.filter((x) => x.id === strId)[0]
 				let arrayDivIndex = divArray.indexOf(divIndex)
 				deletedDivs.push([divLine, arrayDivIndex])
@@ -687,7 +689,7 @@ function insertWords() {
 				// This creates a text input from which the text of any div can be modified
 				if (dynamicTextBoxLimit) {
 					// if a dynamic text input already exists replace it with it's original div then continue as normal
-					let olderTextInput = document.getElementById("dynamicInput")
+					let olderTextInput = document.getElementById('dynamicInput')
 					let olderDiv = originalDivs.pop()
 					olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
 					dynamicTextBoxLimit--
@@ -695,22 +697,22 @@ function insertWords() {
 				// This is for telling if a dynamic text input exists currently
 				dynamicTextBoxLimit++
 				// create the text input
-				let dynamicInput = document.createElement("INPUT")
-				dynamicInput.setAttribute("type", "text")
-				dynamicInput.id = "dynamicInput"
+				let dynamicInput = document.createElement('INPUT')
+				dynamicInput.setAttribute('type', 'text')
+				dynamicInput.id = 'dynamicInput'
 
 				let id = this.id
 				let strId = id.toString()
 				let divLine = document.getElementById(strId)
 				originalDivs.push(divLine)
 				// set the input value to what the text is
-				dynamicInput.setAttribute("value", divLine.innerText)
+				dynamicInput.setAttribute('value', divLine.innerText)
 				// replaces the original div with the new text input with the value filled in
 				let parentDiv = divLine.parentNode
 				parentDiv.replaceChild(dynamicInput, divLine)
 				// adds the ability to hit enter
-				document.getElementById("dynamicInput").addEventListener("keyup", (event) => {
-					if (event.key === "Enter") {
+				document.getElementById('dynamicInput').addEventListener('keyup', (event) => {
+					if (event.key === 'Enter') {
 						let originalDiv = originalDivs.pop()
 						originalDiv.innerText = dynamicInput.value
 						parentDiv.replaceChild(originalDiv, dynamicInput)
@@ -720,14 +722,14 @@ function insertWords() {
 				})
 			}
 		}
-		div.innerHTML = words.join(" ") // This will be the content of a line
+		div.innerHTML = words.join(' ') // This will be the content of a line
 
-		document.getElementById("generatedWords").appendChild(div)
+		document.getElementById('generatedWords').appendChild(div)
 	}
 }
 
 function deleteAll() {
-	let rhymeLines = document.getElementById("generatedWords")
+	let rhymeLines = document.getElementById('generatedWords')
 	let allRhymesDeletedDiv = []
 	while (rhymeLines.firstChild) {
 		allRhymesDeletedDiv.push([document.getElementById(rhymeLines.firstChild.id), 0, 1])
@@ -745,31 +747,31 @@ function undoDeleted() {
 	if (deletedDiv[2]) {
 		undoDeleteAll.push(deletedDivs.filter((x) => x[2] === 1).length)
 		document
-			.getElementById("generatedWords")
+			.getElementById('generatedWords')
 			.insertBefore(
 				deletedDiv[0],
-				document.getElementById("generatedWords").childNodes[deletedDiv[1]]
+				document.getElementById('generatedWords').childNodes[deletedDiv[1]]
 			)
 		for (let i = 0; i < undoDeleteAll[0]; i++) {
 			let loopDeletedDiv = deletedDivs.pop()
 			document
-				.getElementById("generatedWords")
+				.getElementById('generatedWords')
 				.insertBefore(
 					loopDeletedDiv[0],
-					document.getElementById("generatedWords").childNodes[loopDeletedDiv[1]]
+					document.getElementById('generatedWords').childNodes[loopDeletedDiv[1]]
 				)
 		}
 	} else {
 		document
-			.getElementById("generatedWords")
+			.getElementById('generatedWords')
 			.insertBefore(
 				deletedDiv[0],
-				document.getElementById("generatedWords").childNodes[deletedDiv[1]]
+				document.getElementById('generatedWords').childNodes[deletedDiv[1]]
 			)
 	}
 	// This ensures that if undoDelete is used on a deleteAll then if a dynamic text input exists it will get replaced with its original
 	if (dynamicTextBoxLimit) {
-		let olderTextInput = document.getElementById("dynamicInput")
+		let olderTextInput = document.getElementById('dynamicInput')
 		if (olderTextInput.parentNode) {
 			let olderDiv = originalDivs.pop()
 			olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
@@ -779,21 +781,21 @@ function undoDeleted() {
 }
 
 function advancedSettingsSwap() {
-	let graphemeStructure = document.getElementsByClassName("graphemeStructure")
+	let graphemeStructure = document.getElementsByClassName('graphemeStructure')
 	console.log(graphemeStructure[0].style.display)
-	if (graphemeStructure[0].style.display === "" || graphemeStructure[0].style.display === "none") {
-		graphemeStructure[0].style.display = "block"
-		graphemeStructure[1].style.display = "block"
+	if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
+		graphemeStructure[0].style.display = 'block'
+		graphemeStructure[1].style.display = 'block'
 	} else {
-		graphemeStructure[0].style.display = "none"
-		graphemeStructure[1].style.display = "none"
+		graphemeStructure[0].style.display = 'none'
+		graphemeStructure[1].style.display = 'none'
 	}
 }
 
 // Let's you hit enter for the putting in a youtube video
 window.onload = function () {
-	document.getElementById("youtubeLink").addEventListener("keyup", (event) => {
-		event.key === "Enter" ? document.getElementById("youtubeButton").click() : undefined
+	document.getElementById('youtubeLink').addEventListener('keyup', (event) => {
+		event.key === 'Enter' ? document.getElementById('youtubeButton').click() : undefined
 	})
 }
 
@@ -802,29 +804,29 @@ let embedRegex = /watch\?v=/
 
 function getYoutube() {
 	// initial link
-	let link = document.getElementById("youtubeLink").value
+	let link = document.getElementById('youtubeLink').value
 	// removes everything after the video id
-	let newLink = link.replace(youtubeRegex, "")
+	let newLink = link.replace(youtubeRegex, '')
 	// changes "/watch?v=" to "/embed/"
-	let finalLink = newLink.replace(embedRegex, "embed/")
+	let finalLink = newLink.replace(embedRegex, 'embed/')
 	// If a video already exists remove it before adding the new one
-	if (document.getElementById("randomid")) {
-		document.getElementById("randomid").remove()
+	if (document.getElementById('randomid')) {
+		document.getElementById('randomid').remove()
 	}
 	// After inputting a link clear the input box
-	document.getElementById("youtubeLink").value = ""
+	document.getElementById('youtubeLink').value = ''
 	// Create the iframe
-	let iframe = document.createElement("iframe")
-	iframe.width = "256"
-	iframe.height = "144"
-	iframe.id = "randomid"
+	let iframe = document.createElement('iframe')
+	iframe.width = '256'
+	iframe.height = '144'
+	iframe.id = 'randomid'
 	iframe.allowFullscreen = 1
-	iframe.setAttribute("src", finalLink)
+	iframe.setAttribute('src', finalLink)
 	iframe.setAttribute(
-		"allow",
-		"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		'allow',
+		'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
 	)
-	document.getElementById("player").appendChild(iframe)
+	document.getElementById('player').appendChild(iframe)
 }
 
 function OverlordAndInsert() {
