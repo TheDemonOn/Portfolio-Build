@@ -13,16 +13,18 @@
 </head>
 
 <div class="headerBackground">
-
-  <header class="margin">
-    <h1>Hello, Stranger</h1>
-    <h2>
-      Hello, Stranger. This is the first project I ever made that was basically
-      just a jumping off point for learning how to build a website with complex
-      javascript.
-    </h2>
-  </header>
 </div>
+
+<header class="margin">
+  <h6>Antonio Zamora</h6>
+  <h1 id="hello">Hello, Stranger</h1>
+  <h2 id="subText">
+    Hello, Stranger. This is the first project I ever made that was basically
+    just a jumping off point for learning how to build a website with complex
+    javascript. Here you can generate words created from random graphemes that
+    rhyme in different orientations and structures.
+  </h2>
+</header>
 
 <body>
   <div>
@@ -33,29 +35,50 @@
           <h4>Options</h4>
           <!-- </div>
            -->
-          <h3>How many words per line?</h3>
-          <input type="text" placeholder="How many words per line?" id="WPL" value="2" required />
-          <h3>How many lines?</h3>
-          <input type="text" maxlength="4" placeholder="How many lines?" id="lineNumber" value="4" required />
-          <h3 class="graphemeStructure">VC orientation</h3>
-          <input class="graphemeStructure" id="graphemeStructure" type="text" placeholder="VC orientation" />
-          <h3>Rhyme structure</p>
+          <div class="optionInputs">
+            <h3>How many words per line?</h3>
+            <input type="text" placeholder="Orange header is 28pt" id="WPL" value="2" required />
+          </div>
+          <div class="optionInputs">
+            <h3>How many lines?</h3>
+            <input type="text" maxlength="4" placeholder="How many lines?" id="lineNumber" value="4" required />
+          </div>
+          <div class="optionInputs">
+            <h3>Rhyme structure</h3>
             <input type="text" id="vcvcStructure" placeholder="Rhyme structure" value="1122" />
+          </div>
+          <div class="optionInputs">
+            <h5>Advanced options</h5>
+            <div class="container">
+              <label id="switch" class="switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round" onclick="advancedSettingsSwap()"></div>
+              </label>
+            </div>
+          </div>
+          <div class="optionInputs">
+            <h3 class="graphemeStructure">VC orientation</h3>
+            <input class="graphemeStructure" id="graphemeStructure" type="text" placeholder="VC orientation" />
+          </div>
+          <div class="optionInputs">
+            <!-- <button type="button" onclick="advancedSettingsSwap()">Advanced options</button> -->
+          </div>
+          <div class="optionInputs">
             <button type="button" onclick="OverlordAndInsert()">Generate random words</button>
-            <h4>Edit</h4>
-            <div>
-              <input type="radio" id="modify" name="drone" value="modify" onclick="modifyRadio()" checked>
-              <label class="labelText" for="modify">Modify</label>
-            </div>
-            <div>
-              <input type="radio" id="remove" name="drone" value="remove" onclick="deleteRadio()">
-              <label class="labelText" for="remove">Remove</label>
-            </div>
-            <div class="br">
-              <button type="button" onclick="deleteAll()">Delete All</button>
-              <button type="button" onclick="undoDeleted()">Undo Delete</button>
-            </div>
-            <button class="br" type="button" onclick="advancedSettingsSwap()">Advanced Settings</button>
+          </div>
+          <h4>Edit</h4>
+          <div>
+            <input type="radio" id="modify" name="drone" value="modify" onclick="modifyRadio()" checked>
+            <label class="labelText" for="modify">Modify</label>
+          </div>
+          <div>
+            <input type="radio" id="remove" name="drone" value="remove" onclick="deleteRadio()">
+            <label class="labelText" for="remove">Remove</label>
+          </div>
+          <div class="br">
+            <button type="button" onclick="deleteAll()">Delete All</button>
+            <button type="button" onclick="undoDeleted()">Undo Delete</button>
+          </div>
         </div>
       </form>
       <div id="playerOptions">

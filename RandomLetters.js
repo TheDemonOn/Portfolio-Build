@@ -782,6 +782,7 @@ function undoDeleted() {
 
 function advancedSettingsSwap() {
 	let graphemeStructure = document.getElementsByClassName('graphemeStructure')
+	let checkboxToggle = document.getElementById('switch')
 	console.log(graphemeStructure[0].style.display)
 	if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
 		graphemeStructure[0].style.display = 'block'
