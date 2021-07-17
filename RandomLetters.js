@@ -782,14 +782,19 @@ function undoDeleted() {
 
 function advancedSettingsSwap() {
 	let graphemeStructure = document.getElementsByClassName('graphemeStructure')
-	let checkboxToggle = document.getElementById('switch')
+	let VCOrientation = document.getElementById('graphemeStructure')
+	let checkboxToggle = document.getElementById('genButton')
 	console.log(graphemeStructure[0].style.display)
 	if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
 		graphemeStructure[0].style.display = 'block'
 		graphemeStructure[1].style.display = 'block'
+		checkboxToggle.style.marginTop = '2.1em'
 	} else {
+		// clear advanced options
 		graphemeStructure[0].style.display = 'none'
 		graphemeStructure[1].style.display = 'none'
+		checkboxToggle.style.marginTop = '0.5em'
+		VCOrientation.value = ''
 	}
 }
 
