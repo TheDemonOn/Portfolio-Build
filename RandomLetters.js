@@ -643,7 +643,9 @@ function deleteRadio() {
 		let olderTextInput = document.getElementById('dynamicInput')
 		if (olderTextInput.parentNode) {
 			let olderDiv = originalDivs.pop()
+			olderDiv.style.fontWeight = 'lighter'
 			olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
+			console.log(olderDiv)
 			dynamicTextBoxLimit--
 		}
 	}
@@ -669,11 +671,17 @@ function insertWords() {
 		div.id = Math.random()
 		div.style.fontFamily = 'soleil, sans-serif'
 		div.style.color = '#2f526b'
-		div.style.fontWeight = '1'
+		div.style.fontWeight = 'lighter'
 		div.style.fontStyle = 'normal'
-		div.style.fontSize = '18px'
+		div.style.fontSize = '17px'
 		div.style.lineHeight = '1.6'
 		div.style.cursor = 'pointer'
+		div.onmouseover = () => {
+			div.style.fontWeight = 'bolder'
+		}
+		div.onmouseout = () => {
+			div.style.fontWeight = 'lighter'
+		}
 		div.onclick = function () {
 			// This ties a function of onclick to each div created which reads the element's id and deletes it
 			if (removeOrModify) {
@@ -691,6 +699,7 @@ function insertWords() {
 					// if a dynamic text input already exists replace it with it's original div then continue as normal
 					let olderTextInput = document.getElementById('dynamicInput')
 					let olderDiv = originalDivs.pop()
+					olderDiv.style.fontWeight = 'lighter'
 					olderTextInput.parentNode.replaceChild(olderDiv, olderTextInput)
 					dynamicTextBoxLimit--
 				}
@@ -714,6 +723,7 @@ function insertWords() {
 				document.getElementById('dynamicInput').addEventListener('keyup', (event) => {
 					if (event.key === 'Enter') {
 						let originalDiv = originalDivs.pop()
+						originalDiv.style.fontWeight = 'lighter'
 						originalDiv.innerText = dynamicInput.value
 						parentDiv.replaceChild(originalDiv, dynamicInput)
 						// This removes the flag for a text input existing
@@ -721,6 +731,10 @@ function insertWords() {
 					}
 				})
 			}
+			let selection = document.getElementById('dynamicInput')
+			selection.focus()
+			let length = selection.innerText.length
+			selection.setSelectionRange(length - 1, length - 1)
 		}
 		div.innerHTML = words.join(' ') // This will be the content of a line
 
@@ -784,6 +798,7 @@ function advancedSettingsSwap() {
 	let graphemeStructure = document.getElementsByClassName('graphemeStructure')
 	let VCOrientation = document.getElementById('graphemeStructure')
 	let checkboxToggle = document.getElementById('genButton')
+
 	console.log(graphemeStructure[0].style.display)
 	if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
 		graphemeStructure[0].style.display = 'block'

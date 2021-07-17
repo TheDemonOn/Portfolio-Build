@@ -31,10 +31,7 @@
     <div class="margin">
       <form name="woo">
         <div id="generationParameters">
-          <!-- <div> -->
           <h4>Options</h4>
-          <!-- </div>
-           -->
           <div class="optionInputs">
             <h3>How many words per line?</h3>
             <input type="text" placeholder="Orange header is 28pt" id="WPL" value="2" required />
@@ -64,24 +61,21 @@
             <button type="button" class="generateButton" id="genButton" onclick="OverlordAndInsert()">Generate Random
               Words</button>
           </div>
-          <h4>Edit</h4>
+          <h4 id="edit">Edit</h4>
           <div class="radios">
             <div class="radioGroup">
-              <div class="radio">
-                <input type="radio" id="modify" name="drone" value="modify" onclick="modifyRadio()" checked>
-              </div>
+              <input type="radio" class="radioClass" id="modify" name="drone" value="modify" onclick="modifyRadio()"
+                checked>
               <label class="labelText" for="modify">Modify text</label>
             </div>
             <div class="radioGroup">
-              <div class="radio">
-                <input type="radio" id="remove" name="drone" value="remove" onclick="deleteRadio()">
-              </div>
+              <input type="radio" class="radioClass" id="remove" name="drone" value="remove" onclick="deleteRadio()">
               <label class="labelText" for="remove">Delete text</label>
             </div>
           </div>
-          <div class="br">
-            <button type="button" onclick="deleteAll()">Delete All</button>
-            <button type="button" onclick="undoDeleted()">Undo Delete</button>
+          <div class="modifyGroup">
+            <button type="button" class="modifyButtons" onclick="deleteAll()">Delete All</button>
+            <button type="button" class="modifyButtons" onclick="undoDeleted()">Undo Delete</button>
           </div>
         </div>
       </form>
