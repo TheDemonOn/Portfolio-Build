@@ -15,16 +15,38 @@ input {
 	font-size: 16px;
 }
 
+:focus {
+	outline: none;
+	box-shadow: inset 1px 1px 3px 0 #2f526b60;
+}
+
+::placeholder {
+	color: #21394bb9;
+}
+
 #generationParameters input {
 	width: 12.5em;
-	border-radius: 50px;
-	padding: 0.2em 1em;
 	background-color: #f2f2ff;
-	color: #2f526ba8;
+	color: #21394bd3;
 	font-family: soleil, sans-serif;
 	font-weight: lighter;
 	letter-spacing: 0.3px;
 	font-size: 15px;
+	border-radius: 50px;
+	padding: 0.2em 1em;
+}
+
+#playerOptions input {
+	width: 11em;
+	border-radius: 50px;
+	padding: 0.2em 1em;
+}
+
+#dynamicInput {
+	font-weight: bolder;
+	box-shadow: inset 1px 1px 3px 0 #2f526b60;
+	/* width: 26em; */
+	/* width: 12.5em; is default  */
 }
 
 #genButton {
@@ -221,11 +243,6 @@ h6 {
 	letter-spacing: 0.15px;
 }
 
-#dynamicInput {
-	font-weight: bolder;
-	box-shadow: inset 1px 1px 3px 0 #2f526b60;
-}
-
 #edit {
 	margin-top: 0.9em;
 }
@@ -287,7 +304,7 @@ h6 {
 	margin-right: 0.35em;
 	vertical-align: top;
 	cursor: pointer;
-	transition: all 200ms ease;
+	transition: all 50ms ease;
 }
 
 .radioGroup input:checked + .labelText:before {
@@ -332,13 +349,18 @@ h6 {
 
 #playerOptions {
 	position: absolute;
-	top: 55%;
-	right: 15%;
+	top: 47%;
+	right: 13%;
 }
 
 #player {
 	position: absolute;
-	top: 8em;
+	top: 6.7em;
+}
+
+#youtubeAdjust {
+	/* border: solid; */
+	margin-top: -1.4em;
 }
 
 .graphemeStructure {
@@ -346,11 +368,13 @@ h6 {
 }
 
 #wordList {
+	/* border: solid; */
 	position: absolute;
-	left: 0;
-	right: 0;
+	/* left: 0; */
+	/* right: 0; */
 	margin-top: 3.5em;
-	margin-left: 40%;
+	margin-left: 38em;
+	padding-bottom: 45em;
 	/* margin-right: 15em; */
-	width: 30%;
+	width: 27em;
 }

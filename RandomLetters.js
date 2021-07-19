@@ -710,9 +710,28 @@ function insertWords() {
 				dynamicInput.setAttribute('type', 'text')
 				dynamicInput.id = 'dynamicInput'
 
+				console.log(dynamicInput)
+
+				// dynamicInput.style.width = '1em'
+				// default is 12.5em for 23 characters
+				// for every next character add 0.5em
+				// max is 26em
+
 				let id = this.id
 				let strId = id.toString()
 				let divLine = document.getElementById(strId)
+
+				let length = divLine.innerText.length
+				console.log(divLine.innerText, length)
+				if (length / 2 > 12.5) {
+					if ((length - 23) / 2 + 12.5 > 26) {
+						dynamicInput.style.width = '26em'
+					} else {
+						dynamicInput.style.width = `${(length - 23) / 2 + 13.5}em`
+					}
+				}
+
+				// console.log(divLine)
 				originalDivs.push(divLine)
 				// set the input value to what the text is
 				dynamicInput.setAttribute('value', divLine.innerText)
@@ -820,16 +839,30 @@ window.onload = function () {
 	})
 }
 
-let youtubeRegex = /\&.*$/
+let afterID = /\&.*$/
+// let grabRegex = /\b\/.*/
 let embedRegex = /watch\?v=/
+
+let beforeID = /.*\//
+
+// https://youtu.be/rmhwCYeUVbU
+
+// https://www.youtube.com/watch?v=rmhwCYeUVbU
+
+// https://www.youtube.com/embed/rmhwCYeUVbU
 
 function getYoutube() {
 	// initial link
 	let link = document.getElementById('youtubeLink').value
 	// removes everything after the video id
-	let newLink = link.replace(youtubeRegex, '')
-	// changes "/watch?v=" to "/embed/"
-	let finalLink = newLink.replace(embedRegex, 'embed/')
+	let linkStep2 = link.replace(afterID, '')
+	// removes everything before the video id
+	let linkStep3 = linkStep2.replace(beforeID, '')
+	console.log(linkStep3)
+	let linkStep4 = linkStep3.replace(embedRegex, '')
+	console.log(linkStep4)
+	let finalLink = 'https://www.youtube.com/embed/' + linkStep4
+	console.log(finalLink)
 	// If a video already exists remove it before adding the new one
 	if (document.getElementById('randomid')) {
 		document.getElementById('randomid').remove()
