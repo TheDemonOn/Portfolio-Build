@@ -1,5 +1,16 @@
-// This controls the state change of the youtube play button svg
 document.addEventListener('DOMContentLoaded', () => {
+	// if the page is refreshed the position of the checkbos stays how it was
+	// so if the toggle is true then this will make sure it is displayed on load
+	let graphemeStructure = document.getElementsByClassName('graphemeStructure')
+	let checkboxToggle = document.getElementById('genButton')
+	let slider = document.getElementById('checkbox')
+	if (slider.checked === true) {
+		graphemeStructure[0].style.display = 'block'
+		graphemeStructure[1].style.display = 'block'
+		checkboxToggle.style.marginTop = '2.1em'
+	}
+
+	// This controls the state change of the youtube play button svg
 	let button = document.getElementById('playButton')
 	button.addEventListener('mouseover', () => {
 		document.getElementById('Oval').style.fill = '#BD7858'
@@ -14,6 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.getElementById('Oval').style.fill = '#BD7858'
 	})
 })
+
+// function advancedSettingsSwap() {
+// 	console.log('wHATF IS LIFE')
+// let graphemeStructure = document.getElementsByClassName('graphemeStructure')
+// let VCOrientation = document.getElementById('graphemeStructure')
+// let checkboxToggle = document.getElementById('genButton')
+
+// console.log(graphemeStructure[0].style.display)
+// if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
+// 	graphemeStructure[0].style.display = 'block'
+// 	graphemeStructure[1].style.display = 'block'
+// 	checkboxToggle.style.marginTop = '2.1em'
+// } else {
+// 	// clear advanced options
+// 	graphemeStructure[0].style.display = 'none'
+// 	graphemeStructure[1].style.display = 'none'
+// 	checkboxToggle.style.marginTop = '0.5em'
+// 	VCOrientation.value = ''
+// }
+// }
 
 let assembledWordsArray = []
 let assembledWord = []
@@ -826,7 +857,6 @@ function advancedSettingsSwap() {
 	let VCOrientation = document.getElementById('graphemeStructure')
 	let checkboxToggle = document.getElementById('genButton')
 
-	console.log(graphemeStructure[0].style.display)
 	if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
 		graphemeStructure[0].style.display = 'block'
 		graphemeStructure[1].style.display = 'block'
