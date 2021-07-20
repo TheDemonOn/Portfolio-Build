@@ -40,6 +40,18 @@ input {
 	width: 11em;
 	border-radius: 50px;
 	padding: 0.2em 1em;
+	font-size: 14.5px;
+}
+
+#playButton {
+	/* border: solid; */
+	position: absolute;
+	top: 4em;
+	left: 12.3em;
+}
+
+#Oval {
+	fill: #cb8869;
 }
 
 #dynamicInput {
@@ -190,6 +202,13 @@ h1 {
 	font-size: 80px;
 	letter-spacing: 0.15px;
 	color: #f2f2ff;
+	/* filter: drop-shadow(3px 2px 0px #c47a58); */
+	/* text-shadow: 2px 3px 8px rgb(59, 17, 17) inset; */
+}
+
+#lineSVG {
+	position: absolute;
+	top: 11.9em;
 }
 
 h2 {

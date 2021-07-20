@@ -1,11 +1,19 @@
-function openSlideMenu() {
-	document.getElementById('side-menu').style.width = '200px'
-	document.getElementById('main').style.marginLeft = '200px'
-}
-function closeSlideMenu() {
-	document.getElementById('side-menu').style.width = '0px'
-	document.getElementById('main').style.marginLeft = '0px'
-}
+// This controls the state change of the youtube play button svg
+document.addEventListener('DOMContentLoaded', () => {
+	let button = document.getElementById('playButton')
+	button.addEventListener('mouseover', () => {
+		document.getElementById('Oval').style.fill = '#BD7858'
+	})
+	button.addEventListener('mouseleave', () => {
+		document.getElementById('Oval').style.fill = '#cb8869'
+	})
+	button.addEventListener('mousedown', () => {
+		document.getElementById('Oval').style.fill = '#AC6646'
+	})
+	button.addEventListener('mouseup', () => {
+		document.getElementById('Oval').style.fill = '#BD7858'
+	})
+})
 
 let assembledWordsArray = []
 let assembledWord = []

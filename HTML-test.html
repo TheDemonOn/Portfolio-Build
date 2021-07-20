@@ -18,6 +18,17 @@
 <header class="margin">
   <h6>Antonio Zamora</h6>
   <h1 id="hello">Hello, Stranger</h1>
+  <svg id="lineSVG" width="97px" height="3px" viewBox="0 0 97 3" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Rectangle</title>
+    <g id="P" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Pre-Scroll-Avd.-Off" transform="translate(-252.000000, -189.000000)" fill="#CB8869">
+        <g id="Header" transform="translate(251.900000, 108.960000)">
+          <rect id="Rectangle" x="0.1" y="80.04" width="97" height="3"></rect>
+        </g>
+      </g>
+    </g>
+  </svg>
   <h2 id="subText">
     Hello, Stranger. This is the first project I ever made that was basically
     just a jumping off point for learning how to build a website with complex
@@ -83,7 +94,25 @@
         <h5>Youtube Player</h5>
         <div id="youtubeAdjust">
           <input type="text" id="youtubeLink" placeholder="youtu.be/watch?v=link" />
-          <button id="youtubeButton" type="button" onclick="getYoutube()">P</button>
+          <!-- <div id="youtubeButton" type="button" onclick="getYoutube()"> -->
+          <svg width="28px" id="playButton" onclick="getYoutube()" height="28px" viewBox="0 0 28 28" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Pre-Scroll-Avd.-Off" transform="translate(-1163.000000, -426.000000)">
+                <g id="YouTube-Player" transform="translate(970.000000, 397.000000)">
+                  <g id="Play-Button" transform="translate(193.000000, 29.000000)">
+                    <circle id="Oval" cx="14" cy="14" r="14"></circle>
+                    <path
+                      d="M15.6056145,9.17973761 L20.7633434,18.6355739 C20.8955747,18.8779981 20.8062458,19.1817164 20.5638216,19.3139478 C20.4903773,19.3540083 20.4080551,19.375 20.3243956,19.375 L10.0089378,19.375 C9.73279539,19.375 9.50893776,19.1511424 9.50893776,18.875 C9.50893776,18.7913405 9.52992945,18.7090182 9.56998998,18.6355739 L14.7277189,9.17973761 C14.8599502,8.93731344 15.1636686,8.84798452 15.4060927,8.98021589 C15.490376,9.02618857 15.5596418,9.09545435 15.6056145,9.17973761 Z"
+                      id="Triangle" fill="#F2F5FF"
+                      transform="translate(15.166667, 13.875000) rotate(-270.000000) translate(-15.166667, -13.875000) ">
+                    </path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <!-- </div> -->
           <div id="player"></div>
         </div>
       </div>
