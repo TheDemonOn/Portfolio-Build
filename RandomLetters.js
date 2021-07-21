@@ -865,7 +865,7 @@ function advancedSettingsSwap() {
 		// clear advanced options
 		graphemeStructure[0].style.display = 'none'
 		graphemeStructure[1].style.display = 'none'
-		checkboxToggle.style.marginTop = '0.5em'
+		// checkboxToggle.style.marginTop = '0.5em'
 		VCOrientation.value = ''
 	}
 }
@@ -873,15 +873,16 @@ function advancedSettingsSwap() {
 // Let's you hit enter for the putting in a youtube video
 window.onload = function () {
 	document.getElementById('youtubeLink').addEventListener('keyup', (event) => {
-		event.key === 'Enter' ? document.getElementById('youtubeButton').click() : undefined
+		event.key === 'Enter' ? getYoutube() : undefined
 	})
+	OverlordAndInsert()
 }
 
 let afterID = /\&.*$/
-// let grabRegex = /\b\/.*/
 let embedRegex = /watch\?v=/
-
 let beforeID = /.*\//
+
+// test cases
 
 // https://youtu.be/rmhwCYeUVbU
 
@@ -899,26 +900,28 @@ function getYoutube() {
 	console.log(linkStep3)
 	let linkStep4 = linkStep3.replace(embedRegex, '')
 	console.log(linkStep4)
-	let finalLink = 'https://www.youtube.com/embed/' + linkStep4
-	console.log(finalLink)
-	// If a video already exists remove it before adding the new one
-	if (document.getElementById('randomid')) {
-		document.getElementById('randomid').remove()
+	if (linkStep4) {
+		let finalLink = 'https://www.youtube.com/embed/' + linkStep4
+		console.log(finalLink)
+		// If a video already exists remove it before adding the new one
+		if (document.getElementById('randomid')) {
+			document.getElementById('randomid').remove()
+		}
+		// After inputting a link clear the input box
+		document.getElementById('youtubeLink').value = ''
+		// Create the iframe
+		let iframe = document.createElement('iframe')
+		iframe.width = '256'
+		iframe.height = '144'
+		iframe.id = 'randomid'
+		iframe.allowFullscreen = 1
+		iframe.setAttribute('src', finalLink)
+		iframe.setAttribute(
+			'allow',
+			'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+		)
+		document.getElementById('player').appendChild(iframe)
 	}
-	// After inputting a link clear the input box
-	document.getElementById('youtubeLink').value = ''
-	// Create the iframe
-	let iframe = document.createElement('iframe')
-	iframe.width = '256'
-	iframe.height = '144'
-	iframe.id = 'randomid'
-	iframe.allowFullscreen = 1
-	iframe.setAttribute('src', finalLink)
-	iframe.setAttribute(
-		'allow',
-		'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-	)
-	document.getElementById('player').appendChild(iframe)
 }
 
 function OverlordAndInsert() {
