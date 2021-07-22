@@ -24,27 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	button.addEventListener('mouseup', () => {
 		document.getElementById('Oval').style.fill = '#BD7858'
 	})
+
+	document.addEventListener('resize', () => {
+		if (window.innerWidth <= 750) {
+			// Revert the changes to align with original css
+			// Use window.matchMedia() with an eventListener to check for the media queries occuring and then
+			// modify the position of "wordList" accordingly from here in the javascript
+		}
+	})
 })
-
-// function advancedSettingsSwap() {
-// 	console.log('wHATF IS LIFE')
-// let graphemeStructure = document.getElementsByClassName('graphemeStructure')
-// let VCOrientation = document.getElementById('graphemeStructure')
-// let checkboxToggle = document.getElementById('genButton')
-
-// console.log(graphemeStructure[0].style.display)
-// if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
-// 	graphemeStructure[0].style.display = 'block'
-// 	graphemeStructure[1].style.display = 'block'
-// 	checkboxToggle.style.marginTop = '2.1em'
-// } else {
-// 	// clear advanced options
-// 	graphemeStructure[0].style.display = 'none'
-// 	graphemeStructure[1].style.display = 'none'
-// 	checkboxToggle.style.marginTop = '0.5em'
-// 	VCOrientation.value = ''
-// }
-// }
 
 let assembledWordsArray = []
 let assembledWord = []
@@ -861,12 +849,27 @@ function advancedSettingsSwap() {
 		graphemeStructure[0].style.display = 'block'
 		graphemeStructure[1].style.display = 'block'
 		checkboxToggle.style.marginTop = '2.1em'
+		if (window.innerWidth <= 750) {
+			let wordList = document.getElementById('wordList')
+			let pixelCountString = window.getComputedStyle(wordList).top
+			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
+			let pixelCountNum = parseInt(pixelCount2, 10)
+			wordList.style.top = `${pixelCountNum + 75}px`
+		}
 	} else {
 		// clear advanced options
 		graphemeStructure[0].style.display = 'none'
 		graphemeStructure[1].style.display = 'none'
+		// wordList.style.marginTop = '-32em'
 		// checkboxToggle.style.marginTop = '0.5em'
 		VCOrientation.value = ''
+		if (window.innerWidth <= 750) {
+			let wordList = document.getElementById('wordList')
+			let pixelCountString = window.getComputedStyle(wordList).top
+			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
+			let pixelCountNum = parseInt(pixelCount2, 10)
+			wordList.style.top = `${pixelCountNum - 75}px`
+		}
 	}
 }
 
@@ -909,6 +912,13 @@ function getYoutube() {
 		}
 		// After inputting a link clear the input box
 		document.getElementById('youtubeLink').value = ''
+		if (window.innerWidth <= 750) {
+			let wordList = document.getElementById('wordList')
+			let pixelCountString = window.getComputedStyle(wordList).top
+			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
+			let pixelCountNum = parseInt(pixelCount2, 10)
+			wordList.style.top = `${pixelCountNum + 150}px`
+		}
 		// Create the iframe
 		let iframe = document.createElement('iframe')
 		iframe.width = '256'

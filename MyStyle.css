@@ -417,13 +417,12 @@ h6 {
 #wordList {
 	border: solid;
 	position: relative;
-	/* display: inline; */
 	margin-top: -32em;
-	/* margin-left: 18.5em; */
+	/* margin-top: -37em; */
 	margin-left: 30%;
-	/* left should be 30%-40% */
 	padding-bottom: 45em;
 	width: 27em;
+	overflow-x: hidden;
 }
 
 /*  */
@@ -489,6 +488,29 @@ h6 {
 @media (max-width: 880px) {
 	#wordList {
 		margin-left: 40%;
+	}
+	.margin {
+		margin-left: 3%;
+		margin-right: 3%;
+	}
+}
+
+@media (max-width: 750px) {
+	/* Phone view */
+	#wordList {
+		border: solid;
+		position: absolute;
+		top: 78em;
+		/* top: 100vh; */
+		bottom: 0em;
+		left: 0;
+		right: 0;
+		padding-bottom: 0em;
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 30em;
+		width: 20em;
+		overflow-x: hidden;
 	}
 	.margin {
 		margin-left: 3%;
