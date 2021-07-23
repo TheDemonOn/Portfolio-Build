@@ -417,23 +417,22 @@ h6 {
 #wordList {
 	border: solid;
 	position: relative;
-	margin-top: -32em;
-	/* margin-top: -37em; */
-	margin-left: 30%;
 	padding-bottom: 45em;
 	width: 27em;
 	overflow-x: hidden;
+
+	margin-top: -32em;
+	margin-left: 30%;
 }
 
 /*  */
 
-/* @media (max-height: 710px) {
-	#playerOptions {
-		position: absolute;
-		top: 21em;
-		right: 20%;
-		min-width: 10em;
-	}
+/* #wordList {
+    border: solid;
+    position: relative;
+    padding-bottom: 45em;
+    width: 27em;
+    overflow-x: hidden;
 } */
 
 /* 1058px is the line change the the h1 */
@@ -501,8 +500,6 @@ h6 {
 		border: solid;
 		position: absolute;
 		top: 78em;
-		/* top: 100vh; */
-		bottom: 0em;
 		left: 0;
 		right: 0;
 		padding-bottom: 0em;

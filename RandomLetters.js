@@ -8,6 +8,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		graphemeStructure[0].style.display = 'block'
 		graphemeStructure[1].style.display = 'block'
 		checkboxToggle.style.marginTop = '2.1em'
+
+		if (window.innerWidth <= 750) {
+			// Slider checked while in mobile
+			let wordList = document.getElementById('wordList')
+			console.log('INITISAL THING WORKD')
+			let pixelCountString = window.getComputedStyle(wordList).top
+			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
+			let pixelCountNum = parseInt(pixelCount2, 10)
+			wordList.style.top = `${pixelCountNum + 75}px`
+		} else {
+			// Slider checked while in normal
+			wordList.style.marginTop = '-36.7em'
+		}
 	}
 
 	// This controls the state change of the youtube play button svg
@@ -25,11 +38,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.getElementById('Oval').style.fill = '#BD7858'
 	})
 
-	document.addEventListener('resize', () => {
-		if (window.innerWidth <= 750) {
-			// Revert the changes to align with original css
-			// Use window.matchMedia() with an eventListener to check for the media queries occuring and then
-			// modify the position of "wordList" accordingly from here in the javascript
+	window.addEventListener('resize', () => {
+		let wordList = document.getElementById('wordList')
+		let slider = document.getElementById('checkbox')
+		if (window.innerWidth > 1467) {
+			// Full Page
+			if (slider.checked) {
+				wordList.style.marginTop = '-36.7em'
+			}
+		} else if (window.innerWidth > 750) {
+			// Half Sized Page
+			if (slider.checked) {
+				wordList.style.marginTop = '-42em'
+			}
+			wordList.style.removeProperty('top')
+		} else {
+			// Mobile view
+			if (slider.checked) {
+				wordList.style.removeProperty('margin-top')
+				console.log(mobileToggles[1])
+
+				//
+
+				//  This section need work for the reponsitivity
+				if (mobileToggles[1]) {
+					// wordList.style.top = '90em'
+				} else {
+					wordList.style.top = '82.8em'
+				}
+			}
 		}
 	})
 })
@@ -52,6 +89,8 @@ let wordInformation = {
 	count: 0,
 	line: 0,
 }
+
+let mobileToggles = [0, 0]
 
 function wordBuild() {
 	// this simply combines the array of letters into one then resets everything for the next iteration
@@ -844,31 +883,42 @@ function advancedSettingsSwap() {
 	let graphemeStructure = document.getElementsByClassName('graphemeStructure')
 	let VCOrientation = document.getElementById('graphemeStructure')
 	let checkboxToggle = document.getElementById('genButton')
+	let wordList = document.getElementById('wordList')
 
 	if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
 		graphemeStructure[0].style.display = 'block'
 		graphemeStructure[1].style.display = 'block'
 		checkboxToggle.style.marginTop = '2.1em'
+		if (window.innerWidth <= 1467 && window.innerWidth > 750) {
+			wordList.style.marginTop = '-42em'
+		} else {
+			wordList.style.marginTop = '-36.7em'
+		}
 		if (window.innerWidth <= 750) {
-			let wordList = document.getElementById('wordList')
+			wordList.style.removeProperty('margin-top')
 			let pixelCountString = window.getComputedStyle(wordList).top
 			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
 			let pixelCountNum = parseInt(pixelCount2, 10)
 			wordList.style.top = `${pixelCountNum + 75}px`
+			mobileToggles[0] = 1
 		}
 	} else {
 		// clear advanced options
 		graphemeStructure[0].style.display = 'none'
 		graphemeStructure[1].style.display = 'none'
-		// wordList.style.marginTop = '-32em'
-		// checkboxToggle.style.marginTop = '0.5em'
 		VCOrientation.value = ''
-		if (window.innerWidth <= 750) {
+		if (window.innerWidth > 750) {
+			let marginPixelStr = window.getComputedStyle(wordList).marginTop
+			let marginPixelStr2 = marginPixelStr.slice(0, marginPixelStr.length - 2)
+			let marginPixelNum = parseInt(marginPixelStr2, 10)
+			wordList.style.marginTop = `${marginPixelNum + 75}px`
+		} else if (window.innerWidth <= 750) {
 			let wordList = document.getElementById('wordList')
 			let pixelCountString = window.getComputedStyle(wordList).top
 			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
 			let pixelCountNum = parseInt(pixelCount2, 10)
 			wordList.style.top = `${pixelCountNum - 75}px`
+			mobileToggles[0] = 0
 		}
 	}
 }
@@ -919,6 +969,7 @@ function getYoutube() {
 			let pixelCountNum = parseInt(pixelCount2, 10)
 			wordList.style.top = `${pixelCountNum + 150}px`
 		}
+		mobileToggles[1] = 1
 		// Create the iframe
 		let iframe = document.createElement('iframe')
 		iframe.width = '256'
