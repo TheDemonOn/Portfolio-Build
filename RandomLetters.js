@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
 			let pixelCountNum = parseInt(pixelCount2, 10)
 			wordList.style.top = `${pixelCountNum + 75}px`
-		} else {
+		} else if (window.innerWidth > 1467) {
 			// Slider checked while in normal
 			wordList.style.marginTop = '-36.7em'
+		} else if (window.innerWidth > 750) {
+			wordList.style.marginTop = '-42em'
 		}
 	}
 
@@ -39,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	window.addEventListener('resize', () => {
+		console.log(window.innerWidth)
 		let wordList = document.getElementById('wordList')
 		let slider = document.getElementById('checkbox')
 		if (window.innerWidth > 1467) {
@@ -54,17 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
 			wordList.style.removeProperty('top')
 		} else {
 			// Mobile view
+			wordList.style.removeProperty('margin-top')
 			if (slider.checked) {
-				wordList.style.removeProperty('margin-top')
-				console.log(mobileToggles[1])
-
-				//
-
-				//  This section need work for the reponsitivity
+				// slider checked
 				if (mobileToggles[1]) {
-					// wordList.style.top = '90em'
+					// player active
+					wordList.style.top = '90em'
 				} else {
-					wordList.style.top = '82.8em'
+					wordList.style.top = '80em'
+				}
+			} else {
+				// slider not checked
+				if (mobileToggles[1]) {
+					wordList.style.top = '85em'
 				}
 			}
 		}
@@ -967,7 +972,7 @@ function getYoutube() {
 			let pixelCountString = window.getComputedStyle(wordList).top
 			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
 			let pixelCountNum = parseInt(pixelCount2, 10)
-			wordList.style.top = `${pixelCountNum + 150}px`
+			wordList.style.top = `${pixelCountNum + 154}px`
 		}
 		mobileToggles[1] = 1
 		// Create the iframe
