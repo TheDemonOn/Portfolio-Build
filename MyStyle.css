@@ -49,6 +49,38 @@ input {
 	left: 12.3em;
 }
 
+#infoSVG {
+	position: absolute;
+	top: 2.3em;
+	left: 11em;
+}
+
+#playerBubble {
+	visibility: hidden;
+	opacity: 0%;
+	position: absolute;
+	top: -0.9em;
+	left: 0.4em;
+	transition: all 0.2s;
+}
+
+#infoSVGVC {
+	display: none;
+	position: absolute;
+	top: 19.3em;
+	left: 12.5em;
+}
+
+#VCBubble {
+	visibility: hidden;
+	opacity: 0%;
+	position: absolute;
+	top: 18.3em;
+	left: 14em;
+	z-index: 5;
+	transition: all 0.2s;
+}
+
 #Oval {
 	fill: #cb8869;
 }
@@ -120,6 +152,13 @@ button {
 .modifyGroup {
 	margin-top: 0.8em;
 }
+
+/* 
+
+
+
+
+*/
 
 /* 
 
@@ -407,6 +446,7 @@ h6 {
 
 #wordList {
 	/* border: solid; */
+	visibility: visible;
 	position: relative;
 	padding-bottom: 45em;
 	width: 27em;
@@ -414,6 +454,15 @@ h6 {
 
 	margin-top: -32em;
 	margin-left: 30%;
+}
+
+#generatedWords {
+	visibility: visible;
+}
+
+#wordsPos {
+	position: relative;
+	visibility: hidden;
 }
 
 /*  */
@@ -448,6 +497,18 @@ h6 {
 		position: absolute;
 		top: 2.1em;
 		left: 12.3em;
+	}
+
+	#playerBubble {
+		position: absolute;
+		top: -2.6em;
+		left: 0.4em;
+	}
+
+	#infoSVG {
+		position: absolute;
+		top: 0.5em;
+		left: 11em;
 	}
 
 	#player {
@@ -486,9 +547,9 @@ h6 {
 @media (max-width: 750px) {
 	/* Phone view */
 	#wordList {
-		border: solid;
+		/* border: solid; */
 		position: absolute;
-		top: 75em;
+		top: 39em;
 		left: 0;
 		right: 0;
 		padding-bottom: 0em;

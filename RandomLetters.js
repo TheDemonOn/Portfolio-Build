@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-	// if the page is refreshed the position of the checkbos stays how it was
+	// if the page is refreshed the position of the checkbox stays how it was
 	// so if the toggle is true then this will make sure it is displayed on load
 	let graphemeStructure = document.getElementsByClassName('graphemeStructure')
 	let checkboxToggle = document.getElementById('genButton')
 	let slider = document.getElementById('checkbox')
 	if (slider.checked === true) {
+		infoSVGVC.style.display = 'block'
 		graphemeStructure[0].style.display = 'block'
 		graphemeStructure[1].style.display = 'block'
 		checkboxToggle.style.marginTop = '2.1em'
@@ -12,11 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (window.innerWidth <= 750) {
 			// Slider checked while in mobile
 			let wordList = document.getElementById('wordList')
-			console.log('INITISAL THING WORKD')
-			let pixelCountString = window.getComputedStyle(wordList).top
-			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
-			let pixelCountNum = parseInt(pixelCount2, 10)
-			wordList.style.top = `${pixelCountNum + 75}px`
+			// console.log('INITISAL THING WORKD')
+			// let pixelCountString = window.getComputedStyle(wordList).top
+			// let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
+			// let pixelCountNum = parseInt(pixelCount2, 10)
+			// wordList.style.top = `${pixelCountNum + 75}px`
 		} else if (window.innerWidth > 1467) {
 			// Slider checked while in normal
 			wordList.style.marginTop = '-36.7em'
@@ -40,12 +41,39 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.getElementById('Oval').style.fill = '#BD7858'
 	})
 
+	let infoButtonPlayer = document.getElementById('infoSVG')
+	infoButtonPlayer.addEventListener('mouseover', () => {
+		document.getElementById('infoPlayer').style.fill = '#466983'
+		document.getElementById('playerBubble').style.visibility = 'inherit'
+		document.getElementById('playerBubble').style.opacity = '100%'
+	})
+	infoButtonPlayer.addEventListener('mouseleave', () => {
+		document.getElementById('infoPlayer').style.fill = '#2F526B'
+		document.getElementById('playerBubble').style.opacity = '0%'
+		document.getElementById('playerBubble').style.visibility = 'hidden'
+	})
+
+	let infoButtonVC = document.getElementById('infoSVGVC')
+	infoButtonVC.addEventListener('mouseover', () => {
+		document.getElementById('infoVC').style.fill = '#466983'
+		document.getElementById('VCBubble').style.visibility = 'inherit'
+		document.getElementById('VCBubble').style.opacity = '100%'
+	})
+	infoButtonVC.addEventListener('mouseleave', () => {
+		document.getElementById('infoVC').style.fill = '#2F526B'
+		document.getElementById('VCBubble').style.opacity = '0%'
+		document.getElementById('VCBubble').style.style.visibility = 'hidden'
+	})
+
 	window.addEventListener('resize', () => {
+		const widthOutput = document.querySelector('#width')
+		console.log(widthOutput)
 		console.log(window.innerWidth)
 		let wordList = document.getElementById('wordList')
 		let slider = document.getElementById('checkbox')
 		if (window.innerWidth > 1467) {
 			// Full Page
+			wordList.style.removeProperty('top')
 			if (slider.checked) {
 				wordList.style.marginTop = '-36.7em'
 			}
@@ -62,14 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
 				// slider checked
 				if (mobileToggles[1]) {
 					// player active
-					wordList.style.top = '90em'
+					wordList.style.top = '48.6em'
 				} else {
-					wordList.style.top = '80em'
+					wordList.style.top = '39em'
 				}
 			} else {
 				// slider not checked
 				if (mobileToggles[1]) {
-					wordList.style.top = '85em'
+					wordList.style.top = '48.6em'
+				} else {
+					wordList.style.top = '39em'
 				}
 			}
 		}
@@ -889,8 +919,10 @@ function advancedSettingsSwap() {
 	let VCOrientation = document.getElementById('graphemeStructure')
 	let checkboxToggle = document.getElementById('genButton')
 	let wordList = document.getElementById('wordList')
+	let infoSVGVC = document.getElementById('infoSVGVC')
 
 	if (graphemeStructure[0].style.display === '' || graphemeStructure[0].style.display === 'none') {
+		infoSVGVC.style.display = 'block'
 		graphemeStructure[0].style.display = 'block'
 		graphemeStructure[1].style.display = 'block'
 		checkboxToggle.style.marginTop = '2.1em'
@@ -901,14 +933,15 @@ function advancedSettingsSwap() {
 		}
 		if (window.innerWidth <= 750) {
 			wordList.style.removeProperty('margin-top')
-			let pixelCountString = window.getComputedStyle(wordList).top
-			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
-			let pixelCountNum = parseInt(pixelCount2, 10)
-			wordList.style.top = `${pixelCountNum + 75}px`
+			// let pixelCountString = window.getComputedStyle(wordList).top
+			// let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
+			// let pixelCountNum = parseInt(pixelCount2, 10)
+			// wordList.style.top = `${pixelCountNum + 0}px`
 			mobileToggles[0] = 1
 		}
 	} else {
 		// clear advanced options
+		infoSVGVC.style.display = 'none'
 		graphemeStructure[0].style.display = 'none'
 		graphemeStructure[1].style.display = 'none'
 		VCOrientation.value = ''
@@ -918,11 +951,11 @@ function advancedSettingsSwap() {
 			let marginPixelNum = parseInt(marginPixelStr2, 10)
 			wordList.style.marginTop = `${marginPixelNum + 75}px`
 		} else if (window.innerWidth <= 750) {
-			let wordList = document.getElementById('wordList')
-			let pixelCountString = window.getComputedStyle(wordList).top
-			let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
-			let pixelCountNum = parseInt(pixelCount2, 10)
-			wordList.style.top = `${pixelCountNum - 75}px`
+			// let wordList = document.getElementById('wordList')
+			// let pixelCountString = window.getComputedStyle(wordList).top
+			// let pixelCount2 = pixelCountString.slice(0, pixelCountString.length - 2)
+			// let pixelCountNum = parseInt(pixelCount2, 10)
+			// wordList.style.top = `${pixelCountNum - 0}px`
 			mobileToggles[0] = 0
 		}
 	}
